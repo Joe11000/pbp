@@ -1,0 +1,12 @@
+language: ruby
+before_install:
+  - gem install bundler
+rvm:
+  - 1.9.3
+before_script:
+  - psql -c 'create database diy_test;' -U postgres
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rake
+

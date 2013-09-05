@@ -1,0 +1,21 @@
+= stylesheet_link_tag "project", media: "all"
+.page-wrap
+  %h1= @project.title
+
+  - if flash[:notice]
+    %h4= flash[:notice]
+
+  .project-info
+    %h3= link_to @project.owner.name, user_url(@project.owner)
+
+    .description
+      %p= @project.description
+
+    %h4= "Hours Donated: " + @project.hours_donated.to_s
+    %h4= "Hours To Go: " + @project.hours_remaining.to_s
+    %h4= "Dollars Donated: $" + @project.dollars_donated.to_s
+    %h4= "Dollars To Go: $" + @project.dollars_remaining.to_s
+
+  %button Donate
+  
+  = link_to "Edit This Project", edit_project_url(@project)

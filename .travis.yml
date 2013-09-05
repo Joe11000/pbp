@@ -12,12 +12,11 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: VMdm/EF4kdGp4qzVlj5+9qa5cK4I9lKtV79Ys8AgCYH7A93uD84wYlOjFM+S268mjJpq4V7hvzorMNgP+szSHZlG8eNr5W9lZX5nl9/9sh9Jomu/VaWOyCQeEho79OxWYLxmpbDlXe0F0lms9l54aJ79Dhj3fhliJqWSYuf89EE=
-  app: ancient-inlet-9686
-  run:
-    - "rake db:migrate"
-    - restart
+    secure: PiLjCqurCh7j6z7aU2oOAFO5Rry2jAcghQ/CFDXPfD5O1x4lLMDq9vMWYnFyvUJCOW8CPtdHatj4AIM2MvHPOJWnI4p+u6QGTCe0BAkeBovbu5pDbvVWLXRY82gf1/BJSrpoZbwY5xYzkMomAqZv+1ou6Zz3Lf5ingzXGncweZw=
+  app: desolate-oasis-7380
   on:
     branch: master
     rvm: 1.9.3
     repo: zachgersh/pbp
+  run:
+    "rake db:migrate"

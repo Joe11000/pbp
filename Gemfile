@@ -6,6 +6,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'filepicker-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

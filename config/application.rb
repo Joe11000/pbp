@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+)require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
 require "active_record/railtie"
@@ -64,5 +64,9 @@ module ParkBenchProjects
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Setup FilePicker
+    config.filepicker_rails.api_key = "AsdYuCt7FQ3Lc8pTMa4z"
+
   end
 end

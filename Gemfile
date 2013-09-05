@@ -17,6 +17,8 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'better_errors'
+  gem 'faker'
+  gem 'binding_of_caller'
 end
 
 group :development do
@@ -29,8 +31,6 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'faker'
-  gem 'binding_of_caller'
   gem 'shoulda-matchers'
 end
 

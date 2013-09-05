@@ -1,0 +1,25 @@
+= stylesheet_link_tag "project", media: "all"
+.page-wrap
+  %h1= @project.title
+
+  - if flash[:notice]
+    %h4= flash[:notice]
+
+  .project-info
+    %h3= link_to @project.owner.name, user_url(@project.owner)
+
+    .description
+      %p= @project.description
+
+
+    - hours = @project.donations.inject(0) { |sum, donation| sum += donation.hours }
+    - hours_remaining = @project.hour_goal - hours
+    - dollars = @project.donations.inject(0) { |sum, donation| sum += donation.dollar_amount }
+    - dollars_remaining = @project.dollar_goal - dollars
+    %h4= "Hours Donated: " + hours.to_s
+    %h4= "Hours To Go: " + hours_remaining.to_s
+    %h4= "Dollars Donated: $" + dollars.to_s
+    %h4= "Dollars To Go: $" + dollars_remaining.to_s
+
+  %button Donate
+  = link_to "Edit This Project", edit_project_url(@project)

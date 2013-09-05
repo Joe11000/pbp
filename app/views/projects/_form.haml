@@ -1,0 +1,30 @@
+.page-wrap
+  = form_for @project do |f|
+    .title{class: ("error" if flash && flash[:error] && flash[:error][:title]) }
+      = f.label :title ,"Title"
+      %br
+      = f.text_field :title
+      %br
+      %br
+    .description{class: ("error" if flash && flash[:error] && flash[:error][:description]) }
+      = f.label :description, "Description"
+      %br
+      = f.text_area :description
+      %br
+      %br
+    .hour_goal
+      = f.label :hour_goal, "Hour Goal"
+      %br
+      = f.number_field :hour_goal, { min: 0, step: 1 }
+      %br
+      %br
+    .dollar_goal
+      = f.label :dollar_goal, "Dollar Goal"
+      %br
+      = f.number_field :dollar_goal, { min: 0, max: 1000000, step: 5 }
+      %br
+      %br
+      = f.submit
+    
+    
+    

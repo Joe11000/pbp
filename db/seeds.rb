@@ -13,7 +13,8 @@ def create_projects(num)
                    title: Faker::Company.catch_phrase,
                    description: Faker::Lorem.sentence(5),
                    hour_goal: rand(50..200),
-                   dollar_goal: rand(100..1000))
+                   dollar_goal: rand(100..1000),
+                   deadline: DateTime.now + rand(15..40))
   end
 end
 

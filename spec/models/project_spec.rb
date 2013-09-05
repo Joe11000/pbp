@@ -51,4 +51,12 @@ describe Project do
       expect(project.dollars_remaining).to eq expected
     end
   end
+
+  context "has a method time remaining" do
+    it { should respond_to(:time_remaining) }
+
+    it "should return how many days are left until the deadline" do
+      expect(project.time_remaining).to be_between(29, 30)
+    end
+  end
 end

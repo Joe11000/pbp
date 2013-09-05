@@ -1,6 +1,12 @@
 ParkBenchProjects::Application.routes.draw do
   root :to => 'welcome#index'
 
+  resources :projects do
+    resources :donations
+  end
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

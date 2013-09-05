@@ -1,0 +1,6 @@
+%h2= "Edit " + @project.title
+
+- if flash[:notice]
+  %h5= flash[:notice]
+
+= render partial: "form"

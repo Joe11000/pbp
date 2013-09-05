@@ -1,0 +1,18 @@
+= stylesheet_link_tag "project", media: "all"
+.page-wrap
+  %h1 All Projects
+  
+  %table{ class: "projects" }
+    %tr
+      %th Title
+      %th Hours
+      %th Dollars
+    - @projects.each do |project|
+    %tr
+    - hours = project.donations.inject(0) { |sum, donation| sum += donation.hours }.to_s
+    - dollars = project.donations.inject(0) { |sum, donation| sum += donation.dollar_amount }.to_s
+      %td= link_to project.title, project_url(project)
+      %td= hours
+      %td= "$" + dollars
+
+  = link_to "Create Project", new_project_url

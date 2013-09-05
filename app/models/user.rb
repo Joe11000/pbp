@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :email
 
+  validates_uniqueness_of :email
+
   attr_accessible :name, :email, :donations, :created_projects, :donated_projects
 end

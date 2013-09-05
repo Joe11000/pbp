@@ -1,0 +1,22 @@
+%h1 Submit your payments
+
+=form_tag("#", id: "payments_form") do
+  =label_tag(:name, "Name")
+  =text_field_tag(:name)
+  %br/
+  =label_tag(:card_num, "Card Number")
+  =text_field_tag(:card_num)
+  %br/
+  =label_tag(:exp_month, "Expiration Month")
+  =text_field_tag(:exp_month)
+  %br/
+  =label_tag(:exp_year, "Expiration Year")
+  =text_field_tag(:exp_year)
+  %br/
+  =label_tag(:postal_code, "Postal Code")
+  =text_field_tag(:postal_code)
+  %br/
+%button Pay
+
+=javascript_include_tag "https://js.balancedpayments.com/v1/balanced.js"
+%script balanced.init('${/v1/marketplaces/TEST-MPv0uxteFANO0h9xY5c6Lrq}');

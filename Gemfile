@@ -16,7 +16,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'better_errors'
 end
 
 group :development do

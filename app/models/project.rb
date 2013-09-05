@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
   validates_presence_of :owner, :title, :description
   validates_uniqueness_of :title
 
-  attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal
+  attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal, :deadline
   
   def hours_donated
     self.donations.inject(0) { |sum, donation| sum += donation.hours }
@@ -22,5 +22,9 @@ class Project < ActiveRecord::Base
 
   def dollars_remaining
     dollar_goal - dollars_donated
+  end
+
+  def time_remaining
+    (deadline.to_i - DateTime.now.to_i) / (24 * 60 * 60)
   end
 end

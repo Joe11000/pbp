@@ -16,3 +16,6 @@
 
 # Ignore simplecov generated file
 *coverage/
+
+# Ignore heroku .env file
+*.env

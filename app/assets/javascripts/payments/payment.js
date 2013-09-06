@@ -9,9 +9,7 @@ $(function() {
       postal_code: form.find("#post_code").val()
     }
     balanced.card.create(creditCardData, function(response) {
-      console.log(response.status);
-      console.log(response.data);
-      console.log(response.error);
+      $.post("/payments", response.data);
     });
   });
 });

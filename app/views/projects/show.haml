@@ -6,7 +6,7 @@
     %h4= flash[:notice]
 
   .project-info
-    %h3= link_to @project.owner.name, user_url(@project.owner)
+    %h3= link_to @project.owner.fb_nickname, user_url(@project.owner)
 
     .description
       %p= @project.description

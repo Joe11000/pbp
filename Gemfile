@@ -5,7 +5,7 @@ gem 'pg'
 gem 'haml'
 gem 'jquery-rails'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '= 1.4.0'
 gem 'balanced'
 
 group :assets do

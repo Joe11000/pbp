@@ -11,7 +11,7 @@ script:
 - bundle exec rake
 deploy:
   provider: heroku
-  api_key:
+  api_key:zachgersh
     secure: PiLjCqurCh7j6z7aU2oOAFO5Rry2jAcghQ/CFDXPfD5O1x4lLMDq9vMWYnFyvUJCOW8CPtdHatj4AIM2MvHPOJWnI4p+u6QGTCe0BAkeBovbu5pDbvVWLXRY82gf1/BJSrpoZbwY5xYzkMomAqZv+1ou6Zz3Lf5ingzXGncweZw=
   app: desolate-oasis-7380
   on:

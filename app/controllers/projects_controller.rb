@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   def create
     @project = User.first.created_projects.new(params[:project])
     if @project.valid?
-      flash[:notice] = "Success"
+      flash[:notice] = "Thank You For Giving"
       @project.save
       redirect_to project_url(@project)
     else
@@ -36,5 +36,6 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @donations = @project.donations
   end
 end

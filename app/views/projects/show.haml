@@ -1,21 +1,59 @@
-= stylesheet_link_tag "project", media: "all"
-.page-wrap
-  %h1= @project.title
+#page-heading
+  .page-header
+    .container
+      .row
+        .span12
+          %h1
+            = @project.title
+            %span
+  .container
+    .arrow-down
+%hr.hr-spacer.space30/
+/
+  Main Content
+  \==================================================
+#blog
+  .container
+    - if flash[:notice]
+      .alert{class: 'alert-success'}
+        = flash[:notice]
 
-  - if flash[:notice]
-    %h4= flash[:notice]
-
-  .project-info
-    %h3= link_to @project.owner.fb_nickname, user_url(@project.owner)
-
-    .description
-      %p= @project.description
-
-    %h4= "Hours Donated: " + @project.hours_donated.to_s
-    %h4= "Hours To Go: " + @project.hours_remaining.to_s
-    %h4= "Dollars Donated: $" + @project.dollars_donated.to_s
-    %h4= "Dollars To Go: $" + @project.dollars_remaining.to_s
-
-  %button Donate
-  
-  = link_to "Edit This Project", edit_project_url(@project)
+    /
+      Content Block
+      \==================================================
+    .row
+      .span8
+        .blog-list
+          .blog-post
+            %p Created By:
+            %p= @project.owner.fb_nickname
+            %p Project Description:
+            %p= @project.description
+            %hr/      /
+      /
+        Content Block Sidebar
+        \==================================================
+      .span4
+        .blog-side
+          .side-box
+          .side-box
+            .page-headline
+              %h3 Data 4 Projects Page.
+            %ul.unstyled
+              %li
+                $
+                = @project.dollars_donated
+                donated of $
+                = @project.dollar_goal
+                goal
+              %li
+                = @project.hours_donated
+                hours committed of
+                = @project.hour_goal
+                hour goal
+              %li
+                = link_to 'Give To Project', new_project_donation_url(@project)
+          .side-box
+            .page-headline
+              %h3 Givers
+            = render template: 'donations/index'

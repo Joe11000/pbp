@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905210904) do
+ActiveRecord::Schema.define(:version => 20130906204941) do
 
   create_table "donations", :force => true do |t|
     t.integer  "user_id",                                                      :null => false
@@ -34,17 +34,11 @@ ActiveRecord::Schema.define(:version => 20130905210904) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "location"
-    t.string   "fb_uid"
-    t.string   "fb_nickname"
-    t.string   "fb_avatar_url"
-    t.string   "fb_oauth"
-    t.string   "fb_oauth_expires_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.string   "name",         :null => false
+    t.string   "email",        :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "balanced_uri"
   end
 
 end

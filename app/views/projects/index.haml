@@ -11,6 +11,4 @@
       %tr
         %td= link_to project.title, project_url(project)
         %td= project.hours_donated.to_s
-        %td= "$" + project.dollars_donated.to_s
-
-  = link_to "Create Project", new_project_url
+        %td= project.dollars_donated.to_s

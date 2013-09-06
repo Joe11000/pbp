@@ -1,0 +1,13 @@
+.page-wrap
+  = form_for [@project, @donation] do |f|
+    = f.label :hours, "Donate hours"
+    %br
+    = f.number_field :hours, { min: 0, step: 1 }
+    %br
+    %br
+    = f.label :dollar_amount, "Donate $"
+    = f.number_field :dollar_amount, { min: 0, step: 1 }
+    %br
+    %br
+    = f.submit
+

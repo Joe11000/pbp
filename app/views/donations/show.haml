@@ -1,0 +1,5 @@
+%table{ class: "projects" }
+  %tr
+    %td= @donation.user.name
+    %td= @donation.hours.to_s
+    %td= "$" + @donation.dollar_amount.to_s

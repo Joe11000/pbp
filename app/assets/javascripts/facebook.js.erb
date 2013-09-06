@@ -1,0 +1,31 @@
+$(function(){
+ 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<%= ENV["FACEBOOK_APP_ID" ] %>',                        
+      status     : true,                                 
+      xfbml      : true                                  
+    }); 
+  };
+
+  $('#sign_in').click(function(e){
+    e.preventDefault()
+    console.log("click")
+    FB.login(function(response) {
+        if(response.authResponse) {
+          console.log(response)
+          $.get('/auth/facebook/callback', { signed_request: response.authResponse.signedRequest }, function(response){ 
+            console.log(response)
+          });
+        }
+    });
+  });
+});

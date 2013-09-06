@@ -1,9 +1,16 @@
 def create_users(num)
   num.times do
-    first = Faker::Name.first_name
-    last = Faker::Name.last_name
-    User.create(name: first + " " + last,
-                email: first + "." + last + "@test.com")
+    user = User.new
+    user.first_name = Faker::Name.first_name
+    user.last_name = Faker::Name.last_name
+    user.email = user.first_name + "." + user.last_name + "@test.com"
+    user.location = Faker::Address.city
+    user.fb_uid = "1234345"
+    user.fb_nickname = user.first_name + user.last_name.slice(0)
+    user.fb_avatar_url = "http://i.imgur.com/emy2g.jpg"
+    user.fb_oauth = 'test'
+    user.fb_oauth_expires_at = 'test'
+    user.save
   end
 end
 

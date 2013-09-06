@@ -1,6 +1,13 @@
 FactoryGirl.define do
   factory :user, aliases: [:owner] do
-    name "Bob"
     sequence(:email) { |n| "bob#{n}@gmail.com" }
+    first_name "Bob"
+    last_name "Jones"
+    location "Chicago"
+    fb_uid "1234"
+    fb_nickname "bobbyj"
+    fb_avatar_url "www.pic.com"
+    fb_oauth "1234"
+    fb_ouath_expires_at = "1"
   end
 end

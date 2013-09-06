@@ -10,8 +10,4 @@ describe User do
   it { should have_many(:created_projects) }
   it { should have_many(:donations) }
   it { should have_many(:donated_projects).through(:donations) }
-
-  it { should validate_presence_of(:email) }
-
-  it { should validate_uniqueness_of(:email) }
 end

@@ -4,6 +4,8 @@ class PaymentsController < ApplicationController
   end
 
   def create
-
+    current_user.balanced_uri = params.uri
+    current_user.save
+    render nothing: true
   end
 end

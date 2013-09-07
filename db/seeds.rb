@@ -1,4 +1,7 @@
 require 'active_support/all'
+require 'balanced'
+
+Balanced.configure(ENV["BALANCED_SECRET"])
 
 def create_users(num)
   num.times do
@@ -12,6 +15,13 @@ def create_users(num)
     user.fb_avatar_url = "http://i.imgur.com/emy2g.jpg"
     user.fb_oauth = 'test'
     user.fb_oauth_expires_at = 'test'
+    response = Balanced::Card.new(:uri => "/v1/marketplaces/TEST-MPv0uxteFANO0h9xY5c6Lrq/cards",
+                                           :name => user.first_name,
+                                           :email => user.email,
+                                           :card_number => "4111111111111111",
+                                           :expiration_month => "10",
+                                           :expiration_year => "2020").save
+    user.balanced_uri = response.attributes["uri"]
     user.save
   end
 end
@@ -48,7 +58,7 @@ def create_donations(per_user)
   end
 end
 
-create_users(50)
+create_users(25)
 create_projects(20)
 create_current_projects(10)
 create_donations(10)

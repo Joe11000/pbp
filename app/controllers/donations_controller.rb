@@ -1,4 +1,5 @@
 class DonationsController < ApplicationController
+
   def index
     @project = Project.find(params[:project_id])
     @donations = @project.donations
@@ -7,6 +8,7 @@ class DonationsController < ApplicationController
   def new
     @project = Project.find(params[:project_id])
     @donation = Donation.new()
+    authorize! :create, @donation
   end
 
   def create
@@ -14,9 +16,12 @@ class DonationsController < ApplicationController
     @donation = @project.donations.create(params[:donation])
     @donation.user = User.first if @donation
 
+    authorize! :update, @donation
+
     if @donation.save
       flash[:notice] = "Successfully Donated"
       redirect_to project_donation_url(@project, @donation)
+      
     else
       flash[:notice] = "Fail"
       render :new
@@ -26,10 +31,13 @@ class DonationsController < ApplicationController
   def edit
     @donation = Donation.find(params["id"])
     @project = @donation.project
+    authorize! :update, @donation
   end
 
   def update
     donation = Donation.find(params[:id])
+
+    authorize! :update, donation
     
     if donation.update_attributes(hours: params[:donation][:hours], dollar_amount: params[:donation][:dollar_amount])
       flash[:notice] = "Sucessfully Edited Donation"

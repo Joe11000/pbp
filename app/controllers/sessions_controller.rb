@@ -1,12 +1,26 @@
-class SessionsController < ApplicationController 
+class SessionsController < ApplicationController
 	def create
-		user = User.from_omniauth(env['omniauth.auth'])
-		session[:user_id] = user.id 
-		redirect_to root_url 
-	end 
+		@user = User.find_or_create_from_omniauth(env['omniauth.auth'])
+		session[:user_id] = @user.id
+    if @user.first_name
+		  redirect_to root_url
+    else
+      redirect_to edit_user_url(@user)
+    end
+	end
 
 	def destroy
-		session[:user_id] = nil 
-		redirect_to root_url	
-	end 
-end 
+		session[:user_id] = nil
+		redirect_to root_url
+	end
+
+  def sign_in
+    @user = User.find(params[:id])
+    if @user.authenticate(params[user])
+      session[:user_id]
+      redirect_to root_url
+    else
+      render template: 'user/new'
+    end
+  end
+end

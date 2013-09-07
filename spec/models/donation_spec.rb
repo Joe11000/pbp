@@ -23,7 +23,7 @@ describe Donation do
     it "should charge the donator the specified amount" do
       donation = user.donations.create(dollar_amount: 10000,
                                        project: FactoryGirl.create(:project))
-      p donation.debit_amount
+
       expect( donation.debit_amount ).to be_true
     end
   end

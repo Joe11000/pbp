@@ -4,23 +4,21 @@
       .row
         .span12
           %h1 Be a giver. Every penny counts.  Every minute matters.
-          %h1  
   .container
     .arrow-down
-%hr.hr-spacer.space30/
+%hr.hr-spacer.space30
 #about_us
-  .container  
+  .container
     .content-box.about
-      .content-box.about
-        %h1 Okay!
-        %h2 How much can you give?
-        = form_for [@project, @donation] do |f|
-          %h3 give hours 
-          = f.text_field :hours, {min: 0, step: 1, class: "span6", value: 5}
-          %h3 give money
-          = f.text_field :dollar_amount, {min: 0, step: 1, class: "span6"}
-          %br
-          %button.btn.span4.center= f.submit "contribute"
-        .span5.about-inner
-        .clearfix
+      %h1 Okay!
+      %h2 How much can you give?
+      = form_for [@project, @donation] do |f|
+        %h3 give hours
+        = f.text_field :hours, {min: 0, step: 1, class: "span6", value: 5}
+        %h3 give money
+        = f.text_field :dollar_amount, {min: 0, step: 1, class: "span6"}
+        %br
+        %button.btn.span4.center= f.submit "contribute"
+      .span5.about-inner
+      .clearfix
   %hr.hr-spacer.space50

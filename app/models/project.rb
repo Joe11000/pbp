@@ -36,4 +36,8 @@ class Project < ActiveRecord::Base
       end
     end
   end
+
+  def funded?
+    hours_remaining <= 0 && dollars_remaining <= 0
+  end
 end

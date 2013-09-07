@@ -7,9 +7,9 @@ class Project < ActiveRecord::Base
   validates_uniqueness_of :title
 
   attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal, :deadline
-  
+
   def hours_donated
-    self.donations.inject(0) { |sum, donation| sum += donation.hours }
+    self.donations.sum("hours")
   end
 
   def hours_remaining
@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
   end
 
   def dollars_donated
-    self.donations.inject(0) { |sum, donation| sum += donation.dollar_amount }
+    self.donations.sum("dollar_amount")
   end
 
   def dollars_remaining

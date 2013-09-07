@@ -28,10 +28,12 @@ class Project < ActiveRecord::Base
     (deadline.to_i - DateTime.now.to_i) / (24 * 60 * 60)
   end
 
-  def get_donations
-    self.donations.map do |donation|
-      {token: donation.user.balanced_uri,
-       amount: donation.dollar_amount.to_f}
+  def self.charge_ending_projects
+    self.find_all_by_deadline(DateTime.now.midnight).each do |project|
+      p project
+      project.donations do |donation|
+        p donation
+      end
     end
   end
 end

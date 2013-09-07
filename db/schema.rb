@@ -14,12 +14,12 @@
 ActiveRecord::Schema.define(:version => 20130907161105) do
 
   create_table "donations", :force => true do |t|
-    t.integer  "user_id",                                                      :null => false
-    t.integer  "project_id",                                                   :null => false
-    t.integer  "hours",                                       :default => 0
-    t.decimal  "dollar_amount", :precision => 8, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.integer  "user_id",                      :null => false
+    t.integer  "project_id",                   :null => false
+    t.integer  "hours",         :default => 0
+    t.integer  "dollar_amount", :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "projects", :force => true do |t|

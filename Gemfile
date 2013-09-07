@@ -7,11 +7,11 @@ gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-facebook', '= 1.4.0'
 gem 'balanced'
+gem "cancan", "~> 1.6.10"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails'
   gem 'jquery-rails'
@@ -37,4 +37,3 @@ group :test do
   gem 'launchy'
   gem 'shoulda-matchers'
 end
-

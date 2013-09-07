@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
+
   def index
     @projects = Project.all
   end
@@ -8,7 +10,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = User.first.created_projects.new(params[:project])
+    @project = current_user.created_projects.new(params[:project])
+
     if @project.valid?
       flash[:notice] = "Thank You For Giving"
       @project.save
@@ -25,6 +28,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
+
     if @project.update_attributes(params[:project])
       flash[:notice] = "Successful Update"
       redirect_to project_url(@project)

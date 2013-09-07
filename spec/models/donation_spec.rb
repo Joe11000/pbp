@@ -16,7 +16,7 @@ describe Donation do
   it { should validate_numericality_of(:dollar_amount) }
 
   context "should have a method that debits the donation" do
-    let(:user) { FactoryGirl.create(:user_with_card) }
+    let(:user) { FactoryGirl.create(:user) }
 
     it { should respond_to(:debit_amount) }
 

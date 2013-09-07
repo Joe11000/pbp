@@ -30,9 +30,9 @@ class Project < ActiveRecord::Base
 
   def self.charge_ending_projects
     self.find_all_by_deadline(DateTime.now.midnight).each do |project|
-      p project
-      project.donations do |donation|
-        p donation
+      project.donations.each do |donation|
+        #This print is intentional
+        p donation.debit_amount
       end
     end
   end

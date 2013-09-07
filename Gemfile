@@ -16,13 +16,14 @@ group :assets do
   gem 'twitter-bootstrap-rails'
   gem 'jquery-rails'
   gem 'less-rails-bootstrap'
-  gem 'therubyracer'  
+  gem 'therubyracer'
 end
 
 group :development, :test do 
   gem 'rspec-rails'
   gem 'faker'
   gem 'binding_of_caller'
+  gem 'spork-rails'
 end
 
 group :development do

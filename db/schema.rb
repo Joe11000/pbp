@@ -11,26 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905210904) do
+ActiveRecord::Schema.define(:version => 20130907161105) do
 
   create_table "donations", :force => true do |t|
-    t.integer  "user_id",                                                      :null => false
-    t.integer  "project_id",                                                   :null => false
-    t.integer  "hours",                                       :default => 0
-    t.decimal  "dollar_amount", :precision => 8, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                   :null => false
-    t.datetime "updated_at",                                                   :null => false
+    t.integer  "user_id",                      :null => false
+    t.integer  "project_id",                   :null => false
+    t.integer  "hours",         :default => 0
+    t.integer  "dollar_amount", :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "projects", :force => true do |t|
-    t.integer  "owner_id",                                                   :null => false
-    t.string   "title",                                                      :null => false
-    t.text     "description",                                                :null => false
-    t.integer  "hour_goal",                                 :default => 0
-    t.decimal  "dollar_goal", :precision => 8, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
-    t.datetime "deadline",                                                   :null => false
+    t.integer  "owner_id",                   :null => false
+    t.string   "title",                      :null => false
+    t.text     "description",                :null => false
+    t.integer  "hour_goal",   :default => 0
+    t.integer  "dollar_goal", :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.datetime "deadline",                   :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -43,8 +43,9 @@ ActiveRecord::Schema.define(:version => 20130905210904) do
     t.string   "fb_avatar_url"
     t.string   "fb_oauth"
     t.string   "fb_oauth_expires_at"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "balanced_customer_uri"
   end
 
 end

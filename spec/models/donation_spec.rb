@@ -14,4 +14,17 @@ describe Donation do
   it { should validate_presence_of(:project) }
 
   it { should validate_numericality_of(:dollar_amount) }
+
+  context "should have a method that debits the donation" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it { should respond_to(:debit_amount) }
+
+    it "should charge the donator the specified amount" do
+      donation = user.donations.create(dollar_amount: 10000,
+                                       project: FactoryGirl.create(:project))
+      p donation.debit_amount
+      expect( donation.debit_amount ).to be_true
+    end
+  end
 end

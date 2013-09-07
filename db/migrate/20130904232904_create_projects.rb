@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string     :title, null: false, unique: true, index: true
       t.text       :description, null: false
       t.integer    :hour_goal, default: 0
-      t.decimal    :dollar_goal, :precision => 8, :scale => 2, default: 0.00
+      t.integer    :dollar_goal, default: 0
       t.timestamps
     end
   end

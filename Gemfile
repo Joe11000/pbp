@@ -22,6 +22,7 @@ group :assets do
   gem 'jquery-rails'
   gem 'less-rails-bootstrap'
   gem 'therubyracer'
+  gem 'font-awesome-rails'
 end
 
 group :development, :test do 

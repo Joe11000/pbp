@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(:version => 20130907161105) do
   end
 
   create_table "projects", :force => true do |t|
-    t.integer  "owner_id",                                                   :null => false
-    t.string   "title",                                                      :null => false
-    t.text     "description",                                                :null => false
-    t.integer  "hour_goal",                                 :default => 0
-    t.decimal  "dollar_goal", :precision => 8, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
-    t.datetime "deadline",                                                   :null => false
+    t.integer  "owner_id",                   :null => false
+    t.string   "title",                      :null => false
+    t.text     "description",                :null => false
+    t.integer  "hour_goal",   :default => 0
+    t.integer  "dollar_goal", :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.datetime "deadline",                   :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -3,6 +3,6 @@ FactoryGirl.define do
     user
     project
     hours         10
-    dollar_amount "10.00"
+    dollar_amount 1000
   end
 end

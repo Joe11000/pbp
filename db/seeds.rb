@@ -17,8 +17,8 @@ def create_users(num)
                                            :email => user.email,
                                            :card_number => "4111111111111111",
                                            :expiration_month => "10",
-                                           :expiration_year => "2020"}).attributes["uri"]
-    user.balanced_customer_uri = user.get_customer_token(response)
+                                           :expiration_year => "2020"})
+    user.set_customer_token(response)
     puts "saved" if user.save
   end
 end
@@ -29,7 +29,7 @@ def create_projects(num)
                    title: Faker::Company.catch_phrase,
                    description: Faker::Lorem.sentence(5),
                    hour_goal: 100,
-                   dollar_goal: 200,
+                   dollar_goal: 20000,
                    deadline: DateTime.now + rand(15..40))
   end
 end
@@ -40,7 +40,7 @@ def create_current_projects(num)
                    title: Faker::Company.catch_phrase,
                    description: Faker::Lorem.sentence(5),
                    hour_goal: 100,
-                   dollar_goal: 200,
+                   dollar_goal: 20000,
                    deadline: DateTime.now.midnight)
   end
 end
@@ -50,7 +50,7 @@ def create_donations(per_user)
     Project.all.sample(per_user).each do |project|
       user.donations.create(project: project,
                             hours: 5,
-                            dollar_amount: 10)
+                            dollar_amount: 1000)
     end
   end
 end

@@ -29,7 +29,7 @@
             %p= @project.owner.fb_nickname
             %p Project Description:
             %p= @project.description
-            %hr/      /
+            %hr
       /
         Content Block Sidebar
         \==================================================
@@ -53,6 +53,9 @@
                 hour goal
               %li
                 = link_to 'Give To Project', new_project_donation_url(@project)
+              - if can? :edit, @project
+                %li
+                  = link_to "Edit This Project", edit_project_url(@project)
           .side-box
             .page-headline
               %h3 Givers

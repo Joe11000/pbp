@@ -27,4 +27,11 @@ class Project < ActiveRecord::Base
   def time_remaining
     (deadline.to_i - DateTime.now.to_i) / (24 * 60 * 60)
   end
+
+  def get_donations
+    self.donations.map do |donation|
+      {token: donation.user.balanced_uri,
+       amount: donation.dollar_amount.to_f}
+    end
+  end
 end

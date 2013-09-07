@@ -1,3 +1,7 @@
+require 'balanced'
+
+Balanced.configure(ENV["BALANCED_SECRET"])
+
 class User < ActiveRecord::Base
   has_many :created_projects, class_name: "Project", foreign_key: :owner_id
   has_many :donations
@@ -28,5 +32,18 @@ class User < ActiveRecord::Base
         user
       end
     end
-  end 
+  end
+
+  # this is only ever used for testing.  Cards are tokenized by balanced in prod
+  def get_card_token(card_details)
+    response = Balanced::Card.new(card_details).save
+    response.attributes["uri"]
+  end
+
+  def set_customer_token(card_uri)
+    response = Balanced::Customer.new(name: "#{self.first_name} #{self.last_name}",
+                                        card_uri: card_uri,
+                                        email: self.email).save
+    self.balanced_customer_uri = response.attributes["uri"]
+  end
 end

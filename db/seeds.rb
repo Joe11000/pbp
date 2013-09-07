@@ -1,7 +1,4 @@
 require 'active_support/all'
-require 'balanced'
-
-Balanced.configure(ENV["BALANCED_SECRET"])
 
 def create_users(num)
   num.times do
@@ -15,14 +12,14 @@ def create_users(num)
     user.fb_avatar_url = "http://i.imgur.com/emy2g.jpg"
     user.fb_oauth = 'test'
     user.fb_oauth_expires_at = 'test'
-    p response = Balanced::Card.new(:uri => "/v1/marketplaces/TEST-MPv0uxteFANO0h9xY5c6Lrq/cards",
+    response = user.get_card_token({:uri => "/v1/marketplaces/TEST-MPv0uxteFANO0h9xY5c6Lrq/cards",
                                            :name => user.first_name,
                                            :email => user.email,
                                            :card_number => "4111111111111111",
                                            :expiration_month => "10",
-                                           :expiration_year => "2020").save.class
-    user.balanced_uri = response.attributes["uri"]
-    user.save
+                                           :expiration_year => "2020"}).attributes["uri"]
+    user.balanced_customer_uri = user.get_customer_token(response)
+    puts "saved" if user.save
   end
 end
 

@@ -1,13 +1,30 @@
+#contact_us
+  .container
+    .row
+      .span12
+        %p We'd love to hear from you. Interested in working together? Fill out the form below with info about your project and we will get back to you right away.
+    %hr.hr-spacer.space15/
+    .row
+      %form
+        .span6
+          %input.span6{:placeholder => "Your Name", :type => "text"}/
+          %input.span6{:placeholder => "Email", :type => "text"}/
+          %input.span6{:placeholder => "Phone Number", :type => "text"}/
+        .span6
+          %textarea.span6{:placeholder => "Comments", :rows => "8"}
+          %p
+            %button.btn.pull-right{:type => "submit"} Send Message
+    %hr.hr-spacer.space35/
+
 .page-wrap
   = form_for [@project, @donation] do |f|
     = f.label :hours, "Donate hours"
     %br
-    = f.number_field :hours, { min: 0, step: 1 }
+    .span6= f.number_field :hours, { min: 0, step: 1, class: "span6" }
     %br
     %br
     = f.label :dollar_amount, "Donate $"
-    = f.number_field :dollar_amount, { min: 0, step: 1 }
+    .span6= f.number_field :dollar_amount, { min: 0, step: 1, class: "span6" }
     %br
     %br
     = f.submit
-

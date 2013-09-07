@@ -8,6 +8,6 @@
     %th Dollars
   - @donations.each do |donation|
     %tr
-      %td= donation.user.name
+      %td= donation.user.fb_nickname
       %td= donation.hours.to_s
       %td= "$" + donation.dollar_amount.to_s

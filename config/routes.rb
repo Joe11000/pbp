@@ -1,5 +1,5 @@
 ParkBenchProjects::Application.routes.draw do
-  root :to => 'welcome#index'
+  root :to => 'projects#index'
 
   resources :projects do
     resources :donations

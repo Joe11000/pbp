@@ -158,6 +158,13 @@ textarea {
 	text-shadow: none;
 }
 
+/*.page-header .container{
+	background-image: url(park_bench.png)
+}
+.container background-image{
+	height: 100%;
+}*/
+
 /* Call To Action
 -------------------------------------------------- */
 .cta {
@@ -615,6 +622,7 @@ textarea {
 #page-heading ul.social-list li i:hover {
 	background-color: #5ADAE2;
 }
+
 
 /* Footer
 -------------------------------------------------- */

@@ -12,4 +12,18 @@ describe User do
   it { should have_many(:donated_projects).through(:donations) }
   it { should validate_uniqueness_of(:email) }
   it { should validate_presence_of(:email) }
+
+  context "it has a method get_customer_token" do
+    it { should respond_to(:get_customer_token) }
+    it { should respond_to(:get_card_token) }
+
+    it "should get a card token" do
+      expect( user.get_card_token.class ).to eq Balanced::Card
+    end
+
+    it "should create a customer" do
+      expect( user.get_customer_token ).to eq Balanced::Customer
+      expect( user.balanced_customer_uri ).to_not eq nil
+    end
+  end
 end

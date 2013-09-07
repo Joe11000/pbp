@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
       @project.save
       redirect_to project_url(@project)
     else
-      flash[:notice] = "Fail"
+      flash.now[:notice] = "Fail"
       render :new
     end
   end
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Successful Update"
       redirect_to project_url(@project)
     else
-      flash[:notice] = "Unsuccessful Update"
+      flash.now[:notice] = "Unsuccessful Update"
       render :edit
     end
   end

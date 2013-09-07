@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let!(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
 
   it 'has a valid factory' do
     user.should be_valid

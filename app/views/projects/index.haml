@@ -47,14 +47,14 @@
           %br/
           .dollars
             %h5 Dollars
-            .progress{class: "progress-striped"}
-              .bar{style: "width: #{ (project.dollars_donated / project.dollar_goal) * 100 }%;"}
+            .progress{class: "progress-striped active"}
+              .bar{style: "width: #{ (project.dollars_donated / project.dollar_goal) * 10000 }%;"}
             Dollars Donated: $
             = project.dollars_donated
           .hours
             %h5 Hours
-            .progress{class: "progress-striped"}
-              .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 100 }%;"}
+            .progress{class: "progress-striped active"}
+              .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 10000 }%;"}
             Hours Committed:
             = project.hours_donated
     %hr.hr-spacer.space50/

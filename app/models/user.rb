@@ -40,10 +40,27 @@ class User < ActiveRecord::Base
     response.attributes["uri"]
   end
 
+  # this is also only ever used for testing.  Bank accounts are tokenized by balanced in prod
+  def get_bankaccount_token(bankaccount_details)
+    response = Balanced::BankAccount.new(bankaccount_details).save
+    response.attributes["uri"]
+  end
+
+  def balanced_customer
+    unless self.balanced_customer_uri
+      response = Balanced::Customer.new(name: "#{self.first_name} #{self.last_name}",
+                             email: self.email).save
+
+      self.balanced_customer_uri = response.attributes["uri"]
+    end
+    Balanced::Customer.find(self.balanced_customer_uri)
+  end
+
   def set_customer_token(card_uri)
-    response = Balanced::Customer.new(name: "#{self.first_name} #{self.last_name}",
-                                        card_uri: card_uri,
-                                        email: self.email).save
-    self.balanced_customer_uri = response.attributes["uri"]
+    balanced_customer.add_card(card_uri)
+  end
+
+  def set_bankaccount_token(bankaccount_uri)
+    balanced_customer.add_bank_account(bankaccount_uri)
   end
 end

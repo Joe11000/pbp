@@ -1,11 +1,12 @@
 class PaymentsController < ApplicationController
   def show
-
   end
 
   def create
-    current_user.balanced_uri = params.uri
+    card_token = params["uri"]
+    current_user.set_customer_token(card_token)
     current_user.save
+
     render nothing: true
   end
 end

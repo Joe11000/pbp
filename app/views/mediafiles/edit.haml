@@ -1,0 +1,6 @@
+%h1 this is the edit page
+= form_for [@project, @mediafile] do |f|
+ = f.url_field  :url
+ = f.text_field :title
+ = f.text_field :type
+

@@ -17,8 +17,7 @@
     %link{:href => "http://fonts.googleapis.com/css?family=Ubuntu:300,400,400italic,700", :rel => "stylesheet"}/
     / HTML5 shim, for IE6-8 support of HTML5 elements
     /[if lt IE 9]
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      = javascript_include_tag "application"
+      = javascript_include_tag "application", "http://html5shim.googlecode.com/svn/trunk/html5.js"
       = csrf_meta_tags
   %body
     /
@@ -37,26 +36,16 @@
                   %span.icon-bar
                   %span.icon-bar
                   %span.icon-bar
-                %a.brand{:href => "index.html"}
+                %a.brand{:href => "/"}
                   %strong Parkbench Projects
                 .nav-collapse.collapse
                   %ul.nav.pull-right
                     %li.active
                       = link_to "Create A Project", new_project_url
                     %li.divider-vertical
-                    %li
+                    %li.active
                       = render 'sessions/login'
-                    %li.divider-vertical
-                    %li
-                      %a{:href => "contact.html"} Support US
-                    %li.divider-vertical
-                    %li
-                      %a{:href => "blog.html"} Blog
-                    %li.divider-vertical
-                    %li.dropdown
-                      %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                        Pages
-                        %b.caret
+                      %b.caret
                       %ul.dropdown-menu
                         %li
                           %a{:href => "features.html"} Features

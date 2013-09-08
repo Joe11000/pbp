@@ -5,12 +5,12 @@
         .span12
           %h1 support local projects with your time or money.
         .span6
-          %h4 John is building a park bench on his street.
+          %h4= @projects.first.title
           .home-btns
-            %a.btn{:href => "#"}
+            %a.btn{:href => "/projects/#{@projects.first.id}"}
               %i.icon-plus>
               Back this project
-            %a.btn{:href => "#"}
+            %a.btn{:href => "#trending-projects"}
               %i.icon-plus>
               See more projects
         .span6
@@ -21,7 +21,7 @@
       .home-cta-inner.text-center
         %h3
           See how you can make an impact today. It's simple.
-          %a.btn.cta-btn{:href => "#"}
+          %a.btn.cta-btn{:href => "/starts"}
             %i.icon-plus>
             Get Started
 %hr.hr-spacer.space35/

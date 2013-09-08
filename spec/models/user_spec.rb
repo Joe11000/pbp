@@ -16,6 +16,15 @@ describe User do
   it { should have_many(:donations) }
   it { should have_many(:donated_projects).through(:donations) }
 
+  context "it send a bunch of lovely emails" do
+    it { should respond_to(:send_welcome) }
+
+    it "should send a welcome email" do
+      user.send_welcome
+      expect( ActionMailer::Base.deliveries.last.to ).to eq [user.email]
+    end
+  end
+
   context "it has a method balanced_customer" do
     it { should respond_to(:balanced_customer) }
 

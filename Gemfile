@@ -8,6 +8,7 @@ gem 'omniauth'
 gem 'omniauth-facebook', '= 1.4.0'
 gem 'balanced'
 gem "cancan", "~> 1.6.10"
+gem 'faker'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -21,7 +22,6 @@ end
 
 group :development, :test do 
   gem 'rspec-rails'
-  gem 'faker'
   gem 'binding_of_caller'
   gem 'spork-rails'
 end

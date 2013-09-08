@@ -12,6 +12,9 @@ ParkBenchProjects::Application.routes.draw do
   get 'payments', to: 'payments#show'
   post 'payments', to: 'payments#create'
 
+  get 'bankaccounts', to: 'bankaccounts#show'
+  post 'bankaccounts', to: 'bankaccounts#create'
+
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'

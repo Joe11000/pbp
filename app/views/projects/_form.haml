@@ -2,7 +2,7 @@
 = stylesheet_link_tag "http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
 :javascript
   $(function(){
-    $('#project_deadline').datepicker();
+    $('#project_deadline').datepicker({ dateFormat: "yy-mm-dd" });
   })
 
 = form_for @project do |f|

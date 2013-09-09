@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
   has_many   :donators, through: :donations, source: :user
   has_many   :mediafiles
 
-  validates_presence_of :owner, :title, :description
+  validates_presence_of :owner, :title, :description, :deadline
   validates_uniqueness_of :title
 
   attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal, :find_all_by_deadline, :deadline

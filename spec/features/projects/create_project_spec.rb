@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe "Project Creation" do
   context "user" do
-    it "can create project" do 
+    it "can create project" do
         project = FactoryGirl.create(:project)
-        
+
         visit root_url
 
         click_link "Sign In With Facebook"
@@ -18,18 +18,15 @@ describe "Project Creation" do
         proj_dollar_goal = "15"
         proj_deadline    = DateTime.now + 10
 
-        fill_in "project[title]",       with: proj_title
-        fill_in "project[description]", with: proj_desc
-        fill_in "project[hour_goal]",   with: proj_hour_goal
-        fill_in "project[dollar_goal]", with: proj_dollar_goal
-        fill_in "project[deadline]",    with: proj_deadline
+        expect{
+          fill_in "project[title]",       with: proj_title
+          fill_in "project[description]", with: proj_desc
+          fill_in "project[hour_goal]",   with: proj_hour_goal
+          fill_in "project[dollar_goal]", with: proj_dollar_goal
+          fill_in "project[deadline]",    with: proj_deadline
+          click_button "Create Project"
+        }.to change(User, :count).by 1
 
-        size_of_projects = Project.all.size
-
-        click_button "Create Project"
-
-        expect(Project.all.size).to eq (size_of_projects + 1)
-        
         # is the last project the one we just created?
         p_last = Project.last
         expect(p.title).to eq           proj_title
@@ -39,7 +36,7 @@ describe "Project Creation" do
         expect(p.deadline).to eq        proj_deadline
 
         # should be redirected to a different page now
-        page.should_not have_css("#project_title") 
+        page.should_not have_css("#project_title")
         expect(Project.last.title).to eq "Pretzels Project Title"
     end
   end

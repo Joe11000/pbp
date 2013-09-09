@@ -1,0 +1,39 @@
+#page-heading
+  .page-header
+    .container
+      .row.home
+        .span12
+          %h3
+            Take the first step towards giving back.
+            .pull-right Create an account today.
+  .container
+    .arrow-down
+%hr.hr-spacer.space35
+  #blog
+    .container
+      .row-fluid
+        .span6
+          .blog-list
+            .blog-post
+              %h3{style: "text-align: center"}
+                = link_to "Sign In With Facebook", sign_in_facebook_url
+              %h3{style: "text-align: center"}
+                = link_to "Sign In With Twitter", sign_in_twitter_url
+          %br
+          .blog-list
+            .blog-post
+              %h3 Sign In
+              = form_tag '/sign_in' do
+                = text_field_tag :email, nil, placeholder: "Email"
+                = password_field_tag :password, nil, placeholder: "Password"
+                %br
+              = submit_tag "Sign In", class: 'btn btn-large'
+        .span6
+          .blog-list
+            - if flash[:notice]
+              .alert{class: 'alert alert-error'}
+                %button.close{type: 'button', data: {dismiss: 'alert'}} &times;
+                = flash[:notice]
+            .blog-post
+              %h3 Sign Up
+              = render partial: "form"

@@ -3,7 +3,7 @@
     .container
       .row.home
         .span12
-          %h1 support local projects with your time or money.
+          %h1 Support local projects with your time or money.
         .span6
           %h4= @projects.first.title
           .home-btns
@@ -24,7 +24,7 @@
           %a.btn.cta-btn{:href => "/starts"}
             %i.icon-plus>
             Get Started
-%hr.hr-spacer.space35/
+%hr.hr-spacer.space35
 /
   Home Container
   \==================================================
@@ -41,20 +41,23 @@
       - row.each do |project|
         .span4.content-box-light.feature
           %h3
-            %i.icon-tablet.icon-2x>
+            - if project.funded?
+              = fa_icon "ok-sign"
+            - else
+              = fa_icon "exclamation-sign"
             = link_to project.title, project_url(project)
           = project.description
           %br/
           .dollars
             %h5 Dollars
             .progress{class: "progress-striped active"}
-              .bar{style: "width: #{ (project.dollars_donated / project.dollar_goal) * 10000 }%;"}
+              .bar{style: "width: #{ (project.dollars_donated / project.dollar_goal.to_f) }%;"}
             Dollars Donated: $
             = project.dollars_donated
           .hours
             %h5 Hours
             .progress{class: "progress-striped active"}
-              .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 10000 }%;"}
+              .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 100 }%;"}
             Hours Committed:
             = project.hours_donated
     %hr.hr-spacer.space50/

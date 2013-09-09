@@ -43,8 +43,18 @@ ActiveRecord::Schema.define(:version => 20130907161105) do
     t.string   "fb_avatar_url"
     t.string   "fb_oauth"
     t.string   "fb_oauth_expires_at"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "twitter_uid"
+    t.string   "twitter_nickname"
+    t.string   "twitter_avatar_url"
+    t.string   "twitter_key"
+    t.string   "twitter_secret"
+    t.string   "method_of_contact"
+    t.string   "nickname"
+    t.string   "avatar"
+    t.string   "password_digest"
+    t.boolean  "admin",                 :default => false
     t.string   "balanced_customer_uri"
   end
 

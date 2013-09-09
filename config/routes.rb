@@ -16,6 +16,11 @@ ParkBenchProjects::Application.routes.draw do
   post 'bankaccounts', to: 'bankaccounts#create'
 
   match 'auth/:provider/callback', to: 'sessions#create'
+  match 'sign_in', to: 'sessions#sign_in', as: 'sign_in'
+
+  match 'auth/facebook', as: 'sign_in_facebook'
+  match 'auth/twitter', as: 'sign_in_twitter'
+
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
   # The priority is based upon order of creation:

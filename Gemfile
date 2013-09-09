@@ -4,8 +4,10 @@ gem 'rails', '3.2.13'
 gem 'pg'
 gem 'haml'
 gem 'jquery-rails'
+gem 'bcrypt-ruby', '= 3.0.0'
 gem 'omniauth'
 gem 'omniauth-facebook', '= 1.4.0'
+gem 'omniauth-twitter'
 gem 'balanced'
 gem "cancan", "~> 1.6.10"
 gem 'faker'
@@ -18,6 +20,7 @@ group :assets do
   gem 'jquery-rails'
   gem 'less-rails-bootstrap'
   gem 'therubyracer'
+  gem 'font-awesome-rails'
 end
 
 group :development, :test do 

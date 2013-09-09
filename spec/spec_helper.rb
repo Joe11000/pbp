@@ -29,8 +29,73 @@ Spork.prefork do
 
   OmniAuth.config.test_mode = true
 
-  def add_user_mock
-    # don't forget to add your mock omniauth object here
+  OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+    provider: 'twitter',
+    uid: '1234',
+    info: {
+      nickname: 'bobjones',
+      name: 'Bob Jones',
+      location: 'Chicago',
+      image: 'imageurl.com',
+      description: 'a very normal guy',
+      urls: {
+        website: nil,
+        twitter: 'https://twitter.com/bobjones'
+      }
+    },
+    credentials: {
+      token: 'token',
+      secret: 'secret'
+    }
+  })
+
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+    :provider => 'facebook',
+    :uid => '1234',
+    :info => {
+      :nickname => 'bobjones',
+      :email => 'bobjones@gmail.com',
+      :name => 'Bob Jones',
+      :first_name => 'Bob',
+      :last_name => 'Jones',
+      :image => 'http://graph.facebook.com/1234567/picture?type=square',
+      :urls => { :Facebook => 'http://www.facebook.com/jbloggs' },
+      :location => 'Chicago, IL',
+      :verified => true
+    },
+    :credentials => {
+      :token => 'TOKEN',
+      :expires_at => 2014010101,
+      :expires => true
+    },
+  })
+
+  def add_user_mock(params = {})
+    provider = params[:provider] || :facebook
+    uid = params[:uid] || "1234"
+    info = params[:info] || {
+      :nickname => 'bobjones',
+      :email => 'bobjones@gmail.com',
+      :name => 'Bob Jones',
+      :first_name => 'Bob',
+      :last_name => 'Jones',
+      :image => 'http://graph.facebook.com/1234567/picture?type=square',
+      :urls => { :Facebook => 'http://www.facebook.com/jbloggs' },
+      :location => 'Chicago, IL',
+      :verified => true
+    }
+    credentials = params[:credentials] || {
+      :token => 'TOKEN',
+      :expires_at => 2014010101,
+      :expires => true
+    }
+
+    OmniAuth.config.add_mock(
+      provider,
+      { uid: uid,
+        info: info,
+        credentials: credentials }
+    )
   end
 
   RSpec.configure do |config|

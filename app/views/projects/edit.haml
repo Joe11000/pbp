@@ -1,6 +1,16 @@
-%h2= "Edit " + @project.title
-
-- if flash[:notice]
-  %h5= flash[:notice]
-
-= render partial: "form"
+#page-heading
+  .page-header
+    .container
+      .row.home
+        .span12
+          %h4.pull-right Do good in your neighborhood today.
+  .container
+    .arrow-down
+%hr.hr-spacer.space35
+#blog
+  .container
+    .row-fluid
+      .span6.offset3
+        .blog-list
+          .blog-post
+            = render partial: "form"

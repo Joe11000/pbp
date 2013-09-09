@@ -30,7 +30,7 @@
             %p Project Description:
             %p= @project.description
             %hr
-            
+
       /
         Content Block Sidebar
         \==================================================
@@ -52,8 +52,10 @@
                 hours committed of
                 = @project.hour_goal
                 hour goal
-              %li
-                = link_to 'Give To Project', new_project_donation_url(@project)
+              - if can? :create, Donation
+                %li= link_to 'Give To Project', new_project_donation_url(@project)
+              - else
+                %li= link_to 'Give To Project', new_user_url
               - if can? :edit, @project
                 %li
                   = link_to "Edit This Project", edit_project_url(@project)

@@ -1,0 +1,35 @@
+#page-heading
+  .page-header
+    .container
+      .row.home
+        .span12
+          %h3
+            Take the first step towards giving back.
+            .pull-right Create an account today.
+  .container
+    .arrow-down
+%hr.hr-spacer.space35
+#blog
+  .container
+    .row-fluid
+      .span4
+        .blog-side
+          .side-box
+            %img{src: "#{@user.avatar}"}
+            %h5= @user.nickname
+            = @user.first_name
+            = @user.last_name
+            %br
+            = @user.location
+            %hr
+            -if can? :edit, @user
+              %h5 Email:
+              = @user.email
+              %hr
+              = link_to "Edit Profile", edit_user_url(@user), class: "btn btn-large"
+
+      .span8
+        .blog-list
+          .blog-post
+            -10.times do
+              %h4= "Things"

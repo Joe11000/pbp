@@ -5,7 +5,7 @@ describe Project do
   let(:donation) { FactoryGirl.create(:donation) }
 
   it 'has a valid factory' do
-    project.should be_valid  
+    project.should be_valid
   end
 
   it { should belong_to(:owner) }
@@ -57,6 +57,22 @@ describe Project do
 
     it "should return how many days are left until the deadline" do
       expect(project.time_remaining).to be_between(29, 30)
+    end
+  end
+
+  context "has a method funded?" do
+    it { should respond_to(:funded?) }
+
+    it "should return a boolean" do
+      expect( project.funded? ).to be_false
+    end
+
+    it "should return true when a project is funded" do
+      donation.dollar_amount = 10000000
+      donation.hours = 1000000
+      donation.save
+      project.donations << donation
+      expect( project.funded? ).to be_true
     end
   end
 end

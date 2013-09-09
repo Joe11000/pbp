@@ -1,12 +1,12 @@
 !!!
 %html
   %head
-    %title Simply Flat - Bootstrap:home
+    %title Parkbench Projects
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
-    = stylesheet_link_tag "bootstrap", "bootstrap.min", "font-awesome", "app"
+    = stylesheet_link_tag "bootstrap", "font-awesome", "app"
     %link{:href => "http://fonts.googleapis.com/css?family=PT+Sans:300,400,400italic,700", :rel => "stylesheet"}
     %link{:href => "http://fonts.googleapis.com/css?family=Ubuntu:300,400,400italic,700", :rel => "stylesheet"}
     = javascript_include_tag "application", "http://html5shim.googlecode.com/svn/trunk/html5.js"
@@ -24,30 +24,33 @@
           .navbar
             .navbar-inner
               .container
-                %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-                  %span.icon-bar
-                  %span.icon-bar
-                  %span.icon-bar
                 %a.brand{:href => "/"}
                   %strong Parkbench Projects
                 .nav-collapse.collapse
                   %ul.nav.pull-right
-                    %li.active
-                      = link_to "Create A Project", new_project_url
+                    -if current_user
+                      %li= link_to "Create A Project", new_project_url
+                    -else
+                      %li= link_to "Create A Project", new_user_url
                     %li.divider-vertical
-                    %li.active
-                      = render 'sessions/login'
-                      %b.caret
-                      %ul.dropdown-menu
-                        %li
-                          %a{:href => "features.html"} Features
-                        %li
-                          %a{:href => "portfolio.html"} Portfolio
-                        %li
-                          %a{:href => "portfolio-item.html"} Portfolio Item
-                        %li
-                          %a{:href => "coming-soon.html"} Coming Soon
-    
+                    -if current_user
+                      %li= link_to "#{current_user.first_name}", user_url(current_user)
+                      %li.divider-vertical
+                      %li= link_to "Sign Out", signout_url
+                    -else
+                      %li.dropdown
+                        %a.dropdown-toggle{role: 'button', data: {toggle: "dropdown"}}
+                          Sign In
+                          %b.caret
+                        %ul.dropdown-menu{role: 'menu'}
+                          %li= link_to "Sign In With Facebook", sign_in_facebook_url
+                          %li= link_to "Sign In With Twitter", sign_in_twitter_url
+                          %li= link_to "Sign In / Sign Up", new_user_url
+                      :javascript
+                        $(function(){
+                          $('.dropdown-toggle').dropdown()
+                          })
+
       = yield
 
     /
@@ -57,33 +60,32 @@
       .container
         .row
           .span4
-            %h4 Simply Flat
-            %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu posuere leo. Pellentesque a lobortis erat. Maecenas vel metus vitae urna sollicitudin eleifend a vel elit.
+            %h4 Parkbench Projects
+            %p A Dev Bootcamp-Chicago final project, Parkbench Projects hopes to become the natioinal standard for organizing local volunteer projects. We also aim to lower the barrier of communication between motivated citizens and the government officials often required to initiate community these projects.
           .span4.testimonial
             %h4 Testimonials
             %blockquote
               %p
                 %i.icon-quote-left
-                Consectetur adipiscing elit. Pellentesque eu posuere leo. Pellentesque a lobortis erat. Maecenas vel metus vitae urna sollicitudin eleifend a vel elit.
-              %small LouEtta
+                This is a fresh, new take on a proven idea; there is no telling how much good can come of this website.
+              %small DaveHoover
+            %blockquote
+              %p
+                %i.icon-quote-left
+                This is the most exciting website concept I have ever seen. Period. And I worked on the Obama campaign website.
+              %small AbiNoda
           .span3.contact.pull-right
             %h4 Contact Us
             %ul.unstyled.contact-list
               %li
                 %i.icon-home.contact-icon>
-                5B Streat, City 50987
+                Chicago, IL
               %li
                 %i.icon-envelope-alt.contact-icon
-                %a{:href => "#"} info@example.com
-              %li
-                %i.icon-phone-sign.contact-icon>
-                1.541.258.2881
-              %li
-                %i.icon-print.contact-icon>
-                1.541.854.8412
+                %a{:href => "#"} info@parkbenchprojects.com
               %li
                 %i.icon-globe.contact-icon
-                %a{:href => "#"} http://www.example.com
+                %a{:href => "http://www.devbootcamp.com"} http://www.devbootcamp.com
         .row
           .span12.social
             %h4 We're Social
@@ -110,12 +112,8 @@
       .container
         .row.credits
           .span6
-            %p © 2013 Simply Flat
+            %p © 2013 Dev Bootcamp
           .span6
             %p.pull-right
               Theme by
-              %a{:href => "http://northify.com"} Northify
-    /
-      Javascript
-      \==================================================
-    %script{:src => "http://code.jquery.com/jquery-latest.js"}
+              %a{:href => "http://northify.com"} SimplyFlat

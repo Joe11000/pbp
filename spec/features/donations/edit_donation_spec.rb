@@ -7,7 +7,7 @@ describe "Donation Editing" do
 
       visit edit_project_donation_url(donation.project, donation)
 
-      page.should have_content("Support local projects with your time or money.")  # should redirect home
+      page.should have_content("Support local projects with your time or money.")
     end
   end
 
@@ -21,40 +21,26 @@ describe "Donation Editing" do
 
       visit edit_project_donation_url(donation.project, donation)
 
-      page.should have_css("#donation_hours")
-      page.should have_css("#donation_dollar_amount") 
+      save_and_open_page
+      
+      test_dollar_amount = 90210
+      test_hours_amount  = 99991
 
-        proj_title       = "Pretzels Project Title"
-        proj_desc        = "Pretzels Project Description"
-        proj_hour_goal   = "15"
-        proj_dollar_goal = "15"
-        proj_deadline    = DateTime.now + 10
+      fill_in "donation[hours]",         with: test_hours_amount 
+      fill_in "donation[dollar_amount]", with: test_dollar_amount
 
-        expect{fill_in "project[title]",       with: proj_title
-               fill_in "project[description]", with: proj_desc
-               fill_in "project[hour_goal]",   with: proj_hour_goal
-               fill_in "project[dollar_goal]", with: proj_dollar_goal
-               fill_in "project[deadline]",    with: proj_deadline}.to change(Project, :count).by 1
+      click_button "contribute"
 
-        click_button "Create Project"
+      # Test if correctly edited
+      expect(Donation.find(donation.id).dollar_amount).to eq test_dollar_amount
+      expect(Donation.find(donation.id).hours).to eq test_hours_amount
 
-        # is the last Project the one we just created?
-        proj_just_created = Project.last
-        expect(proj_just_created.title).to eq proj_title
-        expect(proj_desc).to eq proj_desc
-        expect(proj_hour_goal).to eq proj_hour_goal
-        expect(proj_dollar_goal).to eq proj_dollar_goal
-        expect(proj_deadline).to eq proj_deadline
-
-        # should be redirected to a different page now
-        page.should_not have_css("#project_title") 
-        expect(Project.last.title).to eq "Pretzels Project Title"
-
-
+      # should be redirected to a different page now
+      page.should_not have_content("#donation_hours") 
     end
 
     it "can't edit others donations" do
-      add_user_mock("CIGARETTE")
+      add_user_mock(uid: "CIGARETTE")
       donation = FactoryGirl.create(:donation)
 
       visit root_url
@@ -65,7 +51,6 @@ describe "Donation Editing" do
 
       page.should_not have_css("#donation_hours")
       page.should_not have_css("#donation_dollar_amount") 
-
       page.should have_content("Support local projects with your time or money.")
      end
   end

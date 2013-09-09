@@ -1,6 +1,6 @@
 class DonationsController < ApplicationController
   load_and_authorize_resource
-  
+
   def index
     @project = Project.find(params[:project_id])
     @donations = @project.donations
@@ -17,8 +17,8 @@ class DonationsController < ApplicationController
     @donation.user = current_user if @donation
 
     if @donation.save
-      if @donation.dollar_amount > 0 
-        redirect_to '/payments'
+      if @donation.dollar_amount > 0
+        redirect_to project_payments_url
       else
         flash[:notice] = "Successfully Donated"
         @donations = @project.donations

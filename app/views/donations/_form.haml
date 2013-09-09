@@ -9,7 +9,7 @@
 %hr.hr-spacer.space30
 #about_us
   .container
-    .content-box.about
+    .content-box.about.span6.offset3
       %h1 Okay!
       %h2 How much can you give?
       = form_for [@project, @donation] do |f|
@@ -18,7 +18,7 @@
         %h3 give money
         = f.text_field :dollar_amount, {min: 0, step: 1, class: "span6"}
         %br
-        %button.btn.span4.center= f.submit "contribute"
+        = f.submit "contribute", class: "btn btn-lrg"
       .span5.about-inner
       .clearfix
   %hr.hr-spacer.space50

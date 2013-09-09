@@ -3,17 +3,17 @@ ParkBenchProjects::Application.routes.draw do
 
   resources :projects do
     resources :donations
+
+    get 'payments', to: 'payments#show'
+    post 'payments', to: 'payments#create'
+
+    get 'bankaccounts', to: 'bankaccounts#show'
+    post 'bankaccounts', to: 'bankaccounts#create'
   end
 
   resources :users
 
   get 'starts', to: 'starts#index'
-
-  get 'payments', to: 'payments#show'
-  post 'payments', to: 'payments#create'
-
-  get 'bankaccounts', to: 'bankaccounts#show'
-  post 'bankaccounts', to: 'bankaccounts#create'
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'sign_in', to: 'sessions#sign_in', as: 'sign_in'

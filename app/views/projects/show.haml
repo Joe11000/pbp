@@ -17,6 +17,9 @@
     - if flash[:notice]
       .alert{class: 'alert-success'}
         = flash[:notice]
+    - if flash[:pay_success]
+      .alert{class: 'alert-success'}
+        = flash[:pay_success]
 
     /
       Content Block
@@ -53,9 +56,9 @@
                 = @project.hour_goal
                 hour goal
               - if can? :create, Donation
-                %li= link_to 'Give To Project', new_project_donation_url(@project)
+                %li= link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
               - else
-                %li= link_to 'Give To Project', new_user_url
+                %li= link_to 'Give To Project', new_user_url, class: 'btn btn-lrg'
               - if can? :edit, @project
                 %li
                   = link_to "Edit This Project", edit_project_url(@project)

@@ -8,8 +8,9 @@ FactoryGirl.define do
     fb_nickname           "bobbyj"
     fb_avatar_url         "www.pic.com"
     fb_oauth              "1234"
+    password_digest       "apassworddigest"
     fb_ouath_expires_at = "1"
-    password_digest "apassworddigest"
+
     after(:build) do |user|
       user.set_customer_token
     end

@@ -19,11 +19,11 @@ describe "Project Creation" do
         proj_dollar_goal = "15"
         proj_deadline    = DateTime.now + 10
 
-        expect(fill_in "project[title]",       with: proj_title
+        expect{fill_in "project[title]",       with: proj_title
                fill_in "project[description]", with: proj_desc
                fill_in "project[hour_goal]",   with: proj_hour_goal
                fill_in "project[dollar_goal]", with: proj_dollar_goal
-               fill_in "project[deadline]",    with: proj_deadline).to change(Project, :count).by 1
+               fill_in "project[deadline]",    with: proj_deadline}.to change(Project, :count).by 1
 
         click_button "Create Project"
 
@@ -55,7 +55,7 @@ describe "Project Creation" do
         page.should_not have_css("#project_hour_goal")
         page.should_not have_css("#project_dollar_goal")
 
-        page.should have_content("support local projects with your time or money.")
+        page.should have_content("Support local projects with your time or money.")
     end
   end
 end

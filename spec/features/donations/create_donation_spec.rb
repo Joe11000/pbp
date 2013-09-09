@@ -7,7 +7,7 @@ describe "Creating Donations" do
 
       visit new_project_donation_url(project.id)   
 
-      page.should have_content("support local projects with your time or money.")
+      page.should have_content("Support local projects with your time or money.")
     end
   end
 

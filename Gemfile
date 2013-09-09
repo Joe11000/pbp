@@ -11,6 +11,7 @@ gem 'omniauth-twitter'
 gem 'balanced'
 gem "cancan", "~> 1.6.10"
 gem 'faker'
+gem 'font-awesome-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -20,7 +21,6 @@ group :assets do
   gem 'jquery-rails'
   gem 'less-rails-bootstrap'
   gem 'therubyracer'
-  gem 'font-awesome-rails'
 end
 
 group :development, :test do 

@@ -8,7 +8,6 @@ $(function() {
       expiration_year: form.find("#exp_year").val(),
       postal_code: form.find("#post_code").val()
     }
-    console.log(creditCardData)
     balanced.card.create(creditCardData, function(response) {
       data = {data: response.data, error: response.error, status: response.status}
       $.post("payments/", response, function(response) {

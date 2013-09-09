@@ -66,5 +66,8 @@ module ParkBenchProjects
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.roadie.enabled = true
+    config.assets.enabled = true
   end
 end

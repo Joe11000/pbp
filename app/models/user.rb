@@ -65,6 +65,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  # methods for mailers (both testing and sending)
+
+  def send_welcome
+    UserMailer.welcome_email(self).deliver
+  end
+
+  # all of the stuff below is payments related - see https://docs.balancedpayments.com/current/api
+
   # this is only ever used for testing.  Cards are tokenized by balanced in prod
   def get_card_token
     card = Balanced::Card.new

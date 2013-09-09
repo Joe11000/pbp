@@ -12,6 +12,7 @@ gem 'balanced'
 gem "cancan", "~> 1.6.10"
 gem 'faker'
 gem 'font-awesome-rails'
+gem 'roadie'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

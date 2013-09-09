@@ -1,5 +1,7 @@
 = form_for @user do |f|
-  = f.text_field :first_name, placeholder: "First Name"
+  = f.text_field :nickname
+  - if first_name = @user.errors.messages[:first_name]
+    = f.text_field :first_name, placeholder: "First Name"
   = f.text_field :last_name, placeholder: "Last Name"
   = f.text_field :email, placeholder: "Email"
   = f.text_field :location, placeholder: "Location"
@@ -7,3 +9,15 @@
   = f.password_field :password_confirmation, placeholder: "Password Confirmation"
   %br
   = f.submit class: 'btn btn-large'
+  = f.hidden_field :password_digest
+  = f.hidden_field :fb_uid
+  = f.hidden_field :fb_nickname
+  = f.hidden_field :fb_avatar_url
+  = f.hidden_field :fb_oauth
+  = f.hidden_field :fb_oauth_expires_at
+  = f.hidden_field :twitter_uid
+  = f.hidden_field :twitter_nickname
+  = f.hidden_field :twitter_avatar_url
+  = f.hidden_field :twitter_key
+  = f.hidden_field :twitter_secret
+  = f.hidden_field :avatar

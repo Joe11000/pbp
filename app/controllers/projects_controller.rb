@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   def index
     @projects = Project.all
@@ -11,8 +11,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.created_projects.new(params[:project])
+    @project.deadline = DateTime.parse(params[:project][:deadline])
 
-    if @project.valid?
+    if @project.save
       flash[:notice] = "Thank You For Giving"
       @project.save
       @mediafiles = Mediafile.new

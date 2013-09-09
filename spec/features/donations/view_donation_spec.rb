@@ -23,7 +23,6 @@ describe "View Donation" do
 
   context "user" do
     it "can view all donations" do
-      add_user_mock("1234")
       donation = FactoryGirl.create(:donation)
 
       visit root_url
@@ -36,7 +35,6 @@ describe "View Donation" do
     end
 
     it "can view a donations" do
-      add_user_mock("1234")
       donation = FactoryGirl.create(:donation)
 
       visit root_url
@@ -49,6 +47,5 @@ describe "View Donation" do
       page.should have_content(donation.hours)
       page.should have_content("$" + donation.dollar_amount.to_s)
     end
-    # page.should have_content('support local projects with your time or money.') 
   end 
 end

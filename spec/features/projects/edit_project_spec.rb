@@ -12,7 +12,7 @@ describe "Project Editing" do
       page.should_not have_css("#project_hour_goal")
       page.should_not have_css("#project_dollar_goal")
 
-      page.should have_css("h1", text: "support local projects with your time or money.") # they should have been redirected home
+      page.should have_content("Support local projects with your time or money.") # they should have been redirected home
     end
   end
 
@@ -54,7 +54,7 @@ describe "Project Editing" do
       page.should_not have_css("#project_hour_goal")
       page.should_not have_css("#project_dollar_goal")
 
-      page.should have_content("support local projects with your time or money.")
+      page.should have_content("Support local projects with your time or money.")
     end
   end
 end

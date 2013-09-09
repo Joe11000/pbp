@@ -1,21 +1,32 @@
-%h1 Submit Your Payment Info
+.container
+  .row-fluid
+    .span6.offset3
+      .blog-list
+        .blog-post
+          - if flash[:notice]
+            - flash[:notice].each do |error|
+              .alert{class: 'alert alert-error'}
+                %button.close{type: 'button', data: {dismiss: 'alert'}} &times;
+                = error
 
-=form_tag("#", id: "payments_form") do
-  =label_tag(:name, "Name")
-  =text_field_tag(:name)
-  %br/
-  =label_tag(:card_num, "Card Number")
-  =text_field_tag(:card_num)
-  %br/
-  =label_tag(:exp_month, "Expiration Month")
-  =text_field_tag(:exp_month)
-  =label_tag(:exp_year, "Expiration Year")
-  =text_field_tag(:exp_year)
-  %br/
-  =label_tag(:postal_code, "Postal Code")
-  =text_field_tag(:postal_code)
-  %br/
-%button Pay
+          %h1 Submit Your Payment Info
+
+          =form_tag("#", id: "payments_form") do
+            =label_tag(:name, "Name")
+            =text_field_tag(:name)
+            %br/
+            =label_tag(:card_num, "Card Number")
+            =text_field_tag(:card_num)
+            %br/
+            =label_tag(:exp_month, "Expiration Month")
+            =text_field_tag(:exp_month)
+            =label_tag(:exp_year, "Expiration Year")
+            =text_field_tag(:exp_year)
+            %br/
+            =label_tag(:postal_code, "Postal Code")
+            =text_field_tag(:postal_code)
+            %br/
+          %button{id: "pay", class: 'btn btn-lrg'} Pay
 
 =javascript_include_tag "https://js.balancedpayments.com/v1/balanced.js", "payments/payment"
 %script balanced.init('${/v1/marketplaces/TEST-MPv0uxteFANO0h9xY5c6Lrq}');

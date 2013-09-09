@@ -1,5 +1,5 @@
 $(function() {
-  $("button").on("click", function(){
+  $("#pay").on("click", function(){
     var form = $("#payments_form");
     var creditCardData = {
       name: form.find("#name").val(),
@@ -9,7 +9,10 @@ $(function() {
       postal_code: form.find("#post_code").val()
     }
     balanced.card.create(creditCardData, function(response) {
-      $.post("/payments", response.data);
+      data = {data: response.data, error: response.error, status: response.status}
+      $.post("payments/", response, function(response) {
+        window.location.href = response.redirect_to
+      });
     });
   });
 });

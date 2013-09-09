@@ -7,20 +7,26 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :donated_projects, through: :donations, source: :project 
 
+  validates_presence_of :first_name, :last_name, :email, :location
+  validates_uniqueness_of :email
+
   attr_accessible :donations, :created_projects, :donated_projects, :first_name,
-                  :last_name, :email, :location, :password, :password_confirmation
+                  :last_name, :email, :location, :password, :password_confirmation,
+                  :fb_uid, :fb_nickname, :fb_avatar_url, :fb_oauth, :fb_oauth_expires_at,
+                  :twitter_uid, :twitter_nickname, :twitter_avatar_url, :twitter_key,
+                  :twitter_secret, :avatar, :nickname, :password_digest
 
   has_secure_password
 
-  def self.find_or_create_from_omniauth(auth)
+  def self.find_or_build_from_omniauth(auth)
     if auth.provider == "facebook"
-      find_or_create_from_facebook(auth)
+      find_or_build_from_facebook(auth)
     elsif auth.provider == "twitter"
-      find_or_create_from_twitter(auth)
+      find_or_build_from_twitter(auth)
     end
   end
 
-  def self.find_or_create_from_facebook(auth)
+  def self.find_or_build_from_facebook(auth)
     if user = self.find_by_fb_uid(auth.uid)
       user
     else
@@ -39,12 +45,11 @@ class User < ActiveRecord::Base
 
       user.password = user.password_confirmation = ""
       user.password_digest = "facebook-authorized account"
-      user.save
       user
     end
   end
 
-  def self.find_or_create_from_twitter(auth)
+  def self.find_or_build_from_twitter(auth)
     if user = self.find_by_twitter_uid(auth.uid)
       user
     else
@@ -60,7 +65,6 @@ class User < ActiveRecord::Base
 
       user.password = user.password_confirmation = ""
       user.password_digest = "twitter-authorized account"
-      user.save
       user
     end
   end

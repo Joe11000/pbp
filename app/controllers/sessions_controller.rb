@@ -1,11 +1,13 @@
 class SessionsController < ApplicationController
 	def create
-		@user = User.find_or_create_from_omniauth(env['omniauth.auth'])
+		@user = User.find_or_build_from_omniauth(env['omniauth.auth'])
 		session[:user_id] = @user.id
-    if @user.first_name
+    if @user.valid?
+      @user.save
 		  redirect_to root_url
     else
-      redirect_to edit_user_url(@user)
+      flash[:notice] = "Add first name, last name and email to finish user creation."
+      render template: 'users/new'
     end
 	end
 

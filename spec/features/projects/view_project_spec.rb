@@ -26,7 +26,7 @@ describe "Project Viewing" do
 
   context "user" do
     it "can see all projects" do
-      add_user_mock("1234")
+      add_user_mock(uid: "Prezzels")
       project = FactoryGirl.create(:project)
 
       visit root_url
@@ -40,7 +40,7 @@ describe "Project Viewing" do
     end
 
     it "can see a project" do
-      add_user_mock("1234")
+      add_user_mock(uid: "vroom")
       project = FactoryGirl.create(:project)
 
       visit root_url

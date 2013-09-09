@@ -7,13 +7,20 @@ describe "Creating Donations" do
 
       visit new_project_donation_url(project.id)   
 
+        project = FactoryGirl.create(:project)
+        
+        visit root_url
+
+        # should be redirected to a different page now
+        page.should_not have_css("#project_title") 
+        expect(Project.last.title).to eq "Pretzels Project Title"
+
       page.should have_content("Support local projects with your time or money.")
     end
   end
 
   context "user" do
     it "can visit donation#new page" do
-      add_user_mock("1234")
       project = FactoryGirl.create(:project)
 
       visit root_url

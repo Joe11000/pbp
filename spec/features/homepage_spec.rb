@@ -12,7 +12,7 @@ describe "Homepage" do
     end
 
     it "can login" do
-      add_user_mock("1234")
+      add_user_mock(uid: "1234")
       project = FactoryGirl.create(:project)
 
       visit root_url
@@ -25,7 +25,6 @@ describe "Homepage" do
 
   context "user" do
     it "can view projects" do
-      add_user_mock
       project = FactoryGirl.create(:project)
       
       visit root_url
@@ -34,7 +33,6 @@ describe "Homepage" do
     end
 
     it "can enter the project create view" do
-      add_user_mock
       project = FactoryGirl.create(:project)
 
       visit root_url
@@ -47,7 +45,6 @@ describe "Homepage" do
 
   context "a project owner" do
     it "can enter the project edit view" do
-      add_user_mock("1234")
       project = FactoryGirl.create(:project)
 
       visit root_url

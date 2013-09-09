@@ -66,39 +66,39 @@ describe User do
 
   context "class has a method find_or_create_from_omniauth" do
     it "should return a user" do
-      expect( User.find_or_create_from_omniauth(add_user_mock).class).to eq User
+      expect( User.find_or_build_from_omniauth(add_user_mock).class).to eq User
     end
 
     it "should differentiate between facebook and twitter" do
-      expect( User.find_or_create_from_omniauth(add_user_mock).twitter_uid ).to eq nil
-      expect( User.find_or_create_from_omniauth(add_user_mock(provider: "twitter")).fb_uid ).to eq nil
+      expect( User.find_or_build_from_omniauth(add_user_mock).twitter_uid ).to eq nil
+      expect( User.find_or_build_from_omniauth(add_user_mock(provider: "twitter")).fb_uid ).to eq nil
     end
   end
 
-  context "class has a method find_or_create_from_twitter" do
-    it "should create a user if no user currently has that twitter_uid" do
+  context "class has a method find_or_build_from_twitter" do
+    it "should build a user if no user currently has that twitter_uid" do
       expect {
-        User.find_or_create_from_twitter(add_user_mock(provider: "twitter"))
+        User.find_or_build_from_twitter(add_user_mock(provider: "twitter"))
       }.to change(User, :count).by 1
     end
 
     it "should return an existing user with that twitter id" do
-      FactoryGirl.create(:user)
+      FactoryGirl.build(:user)
       auth = add_user_mock(provider: "twitter")
-      expect( User.find_or_create_from_twitter(auth).twitter_uid ).to eq "1234"
+      expect( User.find_or_build_from_twitter(auth).twitter_uid ).to eq "1234"
     end
   end
 
-  context "class has a method find_or_create_from_facebook" do
-    it "should create a user if no user currently has that fb_uid" do
+  context "class has a method find_or_build_from_facebook" do
+    it "should build a user if no user currently has that fb_uid" do
       expect {
-        User.find_or_create_from_facebook(add_user_mock)
+        User.find_or_build_from_facebook(add_user_mock)
       }.to change(User, :count).by 1
     end
 
     it "should return an existing user with that facebook id" do
-      FactoryGirl.create(:user)
-      expect( User.find_or_create_from_twitter(add_user_mock).fb_uid ).to eq "1234"
+      FactoryGirl.build(:user)
+      expect( User.find_or_build_from_twitter(add_user_mock).fb_uid ).to eq "1234"
     end
   end
 end

@@ -30,8 +30,6 @@ describe "User Creation Process, Anonymous Visitor" do
 
     add_user_mock(provider: "facebook", uid: "A MAN")
 
-    puts OmniAuth.config.mock_auth[:facebook]
-
     visit root_url
 
     expect{ click_link "Sign In With Facebook" }.to change(User, :count).by 1

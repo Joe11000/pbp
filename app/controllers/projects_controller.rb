@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
       flash[:notice] = "Successful Update"
       redirect_to project_url(@project)
     else
-      flash.now[:notice] = "Unsuccessful Update"
+      flash[:notice] = "Unsuccessful Update"
       render :edit
     end
   end

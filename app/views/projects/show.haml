@@ -57,6 +57,9 @@
                 hours committed of
                 = @project.hour_goal
                 hour goal
+              %li
+                Deadline
+                = @project.deadline
               - if can? :create, Donation
                 %li= link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
               - else

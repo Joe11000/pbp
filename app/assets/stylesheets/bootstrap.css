@@ -5956,3 +5956,5 @@ button.close {
     overflow: visible !important;
   }
 }
+
+.calendar td { height: 100px; width: 14.28%;}

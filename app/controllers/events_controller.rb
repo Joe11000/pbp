@@ -1,13 +1,13 @@
 class EventsController < ApplicationController
   def show
-    @events = [Event.first]
+    @events = Project.find(params[:project_id]).events
   end
 
   def create
 
   end
 
-    def new
+  def new
 
   end
 end

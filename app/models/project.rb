@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   belongs_to :owner, class_name: "User", foreign_key: :owner_id
   has_many   :donations
   has_many   :donators, through: :donations, source: :user
+  has_many   :events, dependent: :destroy
 
   validates_presence_of :owner, :title, :description
   validates_uniqueness_of :title

@@ -2,11 +2,13 @@ class Project < ActiveRecord::Base
   belongs_to :owner, class_name: "User", foreign_key: :owner_id
   has_many   :donations
   has_many   :donators, through: :donations, source: :user
+  has_many   :mediafiles
 
   validates_presence_of :owner, :title, :description
   validates_uniqueness_of :title
 
-  attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal, :deadline
+  attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal, :find_all_by_deadline, :deadline
+  accepts_nested_attributes_for :mediafiles
 
   def hours_donated
     self.donations.sum("hours")

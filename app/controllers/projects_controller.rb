@@ -15,7 +15,8 @@ class ProjectsController < ApplicationController
     if @project.valid?
       flash[:notice] = "Thank You For Giving"
       @project.save
-      redirect_to project_url(@project)
+      @mediafiles = Mediafile.new
+      redirect_to new_project_mediafiles_url(@project)
     else
       flash.now[:notice] = "Fail"
       render :new

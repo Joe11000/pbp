@@ -20,7 +20,6 @@
     - if flash[:pay_success]
       .alert{class: 'alert-success'}
         = flash[:pay_success]
-
     /
       Content Block
       \==================================================
@@ -33,7 +32,10 @@
             %p Project Description:
             %p= @project.description
             %hr
-
+            - @project.mediafiles.each do |file|
+              %p file.name
+              %p file.media_type
+              %iframe{:height => "345", :src => file.url, :width => "420"}
       /
         Content Block Sidebar
         \==================================================

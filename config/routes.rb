@@ -11,6 +11,10 @@ ParkBenchProjects::Application.routes.draw do
     post 'bankaccounts', to: 'bankaccounts#create'
   end
 
+  resources :projects do
+    resources :mediafiles
+  end
+
   resources :users
 
   get 'starts', to: 'starts#index'

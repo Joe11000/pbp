@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
       user.fb_oauth_expires_at = auth.credentials.expires_at
 
       user.password = user.password_confirmation = ""
-      user.password_digest = "facebook-authorized account"
+      user.password_digest = "123facebook-authorized account123"
       user
     end
   end
@@ -64,9 +64,18 @@ class User < ActiveRecord::Base
       user.twitter_secret = auth.credentials.secret
 
       user.password = user.password_confirmation = ""
-      user.password_digest = "twitter-authorized account"
+      user.password_digest = "123twitter-authorized account123"
       user
     end
+  end
+
+  def special_save
+    return self.save if self.password && self.password_confirmation
+    if self.twitter_uid || self.fb_uid
+      self.password = self.password_confirmation = ""
+      self.password_digest = "123authorized account123"
+    end
+    self.save
   end
 
   # methods for mailers (both testing and sending)

@@ -8,15 +8,16 @@ describe "User Creation Process, Anonymous Visitor" do
 
     visit root_url
 
-    expect{ click_link "Sign In With Twitter" }.to change(User, :count).by 1
+    click_link "Sign In With Twitter"
 
-    fill_in 'user_first_name', with: "Bob"
-    fill_in 'user_last_name', with: "Jones"
-    fill_in 'user_email', with: "bobjones@gmail.com"
-    fill_in 'user_password', with: "password"
-    fill_in 'user_password_confirmation', with: "password"
-
-    click_button "Update User"
+    expect{
+      fill_in 'user_first_name', with: "Bob"
+      fill_in 'user_last_name', with: "Jones"
+      fill_in 'user_email', with: "bobjones@gmail.com"
+      fill_in 'user_password', with: "password"
+      fill_in 'user_password_confirmation', with: "password"
+      click_button "Create User"
+    }.to change(User, :count).by 1
 
     page.should have_content "Bob"
     page.should have_content "Jones"
@@ -28,6 +29,8 @@ describe "User Creation Process, Anonymous Visitor" do
     project = FactoryGirl.create(:project)
 
     add_user_mock(provider: "facebook", uid: "A MAN")
+
+    puts OmniAuth.config.mock_auth[:facebook]
 
     visit root_url
 

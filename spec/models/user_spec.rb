@@ -25,7 +25,7 @@ describe User do
     end
   end
 
-  context "it has a method balanced_customer" do
+  context "has a method balanced_customer" do
     it { should respond_to(:balanced_customer) }
 
     it "should get a customer" do
@@ -34,7 +34,7 @@ describe User do
     end
   end
 
-  context "it has a method set_customer_token" do
+  context "has a method set_customer_token" do
     it { should respond_to(:set_customer_token) }
     it { should respond_to(:get_card_token) }
 
@@ -48,7 +48,7 @@ describe User do
     end
   end
 
-  context "it has a method set_bankaccount_token" do
+  context "has a method set_bankaccount_token" do
     it { should respond_to(:set_bankaccount_token) }
     it { should respond_to(:get_bankaccount_token) }
 
@@ -78,7 +78,11 @@ describe User do
   context "class has a method find_or_build_from_twitter" do
     it "should build a user if no user currently has that twitter_uid" do
       expect {
-        User.find_or_build_from_twitter(add_user_mock(provider: "twitter"))
+        user = User.find_or_build_from_twitter(add_user_mock(provider: "twitter"))
+        user.first_name = "Bob"
+        user.last_name = "Jones"
+        user.email = "bobjones@gmail.com"
+        user.save
       }.to change(User, :count).by 1
     end
 
@@ -92,13 +96,37 @@ describe User do
   context "class has a method find_or_build_from_facebook" do
     it "should build a user if no user currently has that fb_uid" do
       expect {
-        User.find_or_build_from_facebook(add_user_mock)
+        user = User.find_or_build_from_facebook(add_user_mock)
+        user.save
       }.to change(User, :count).by 1
     end
 
     it "should return an existing user with that facebook id" do
       FactoryGirl.build(:user)
-      expect( User.find_or_build_from_twitter(add_user_mock).fb_uid ).to eq "1234"
+      expect( User.find_or_build_from_facebook(add_user_mock).fb_uid ).to eq "1234"
+    end
+  end
+
+  context "has a method special_save" do
+    let(:user) { User.new( first_name: "testy", last_name: "tester",
+                           email: "testy@tester.com", location: "chicago" )}
+
+    it { should respond_to(:special_save) }
+
+    it "should save the user if it has password confirmation and password" do
+      user.password = "A new password"
+      user.password_confirmation = "A new password"
+      expect( user.special_save ).to be_true
+    end
+
+    it "should save the user if it has a twitter_uid and no password or password_confirmation" do
+      user.twitter_uid = "1234"
+      expect( user.special_save ).to be_true
+    end
+
+    it "should save the user if it has a fb_uid and no password or password_confirmation" do
+      user.fb_uid = "1234"
+      expect( user.special_save ).to be_true
     end
   end
 end

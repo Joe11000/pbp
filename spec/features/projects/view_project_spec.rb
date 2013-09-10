@@ -15,7 +15,7 @@ describe "Project Viewing" do
       project = FactoryGirl.create(:project)
 
       visit project_url(project)
-    
+
       page.should have_content("Created By:")
       page.should have_content(project.description)
       page.should have_content("Project Description:")
@@ -48,7 +48,7 @@ describe "Project Viewing" do
       click_link "Sign In With Facebook"
 
       visit project_url(project)
-    
+
       page.should have_content("Created By:")
       page.should have_content(project.description)
       page.should have_content("Project Description:")

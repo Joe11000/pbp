@@ -4,6 +4,8 @@ ParkBenchProjects::Application.routes.draw do
   resources :projects do
     resources :donations
 
+    resources :events
+
     get 'payments', to: 'payments#show'
     post 'payments', to: 'payments#create'
 

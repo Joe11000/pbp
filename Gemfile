@@ -13,6 +13,7 @@ gem "cancan", "~> 1.6.10"
 gem 'faker'
 gem 'font-awesome-rails'
 gem 'roadie'
+gem "simple_calendar", "~> 0.1.9"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

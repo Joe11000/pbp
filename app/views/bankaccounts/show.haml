@@ -1,19 +1,33 @@
-%h1 Give us your bank account
+.container
+  .row-fluid
+    .span6.offset3
+      .blog-list
+        .blog-post
+          - if flash[:notice]
+            - flash[:notice].each do |error|
+              .alert{class: 'alert alert-error'}
+                %button.close{type: 'button', data: {dismiss: 'alert'}} &times;
+                = error
 
-=form_tag("#", id: "bankaccount_form") do
-  =label_tag(:name, "Name")
-  =text_field_tag(:name)
-  %br/
-  =label_tag(:account_num, "Account Number")
-  =text_field_tag(:account_num)
-  %br/
-  =label_tag(:bank_code, "Routing Number")
-  =text_field_tag(:bank_code)
-  %br/
-  =label_tag(:account_type, "Account Type")
-  =select_tag(:account_type, options_for_select([["Checking","checking"],["Savings","savings"]]))
-  %br/
-%button Add your payout account
+          %h1 Give us your bank account
+          %br
+          %h3 This will only be used to payout donations if your project becomes fully funded
+
+
+          =form_tag("#", id: "bankaccount_form") do
+            =label_tag(:name, "Name")
+            =text_field_tag(:name)
+            %br/
+            =label_tag(:account_num, "Account Number")
+            =text_field_tag(:account_num)
+            %br/
+            =label_tag(:bank_code, "Routing Number")
+            =text_field_tag(:bank_code)
+            %br/
+            =label_tag(:account_type, "Account Type")
+            =select_tag(:account_type, options_for_select([["Checking","checking"],["Savings","savings"]]))
+            %br/
+          %button{id: 'bank', class: 'btn btn-lrg'} Add your payout account
 
 =javascript_include_tag "https://js.balancedpayments.com/v1/balanced.js", "payments/bankaccount"
 %script balanced.init('${/v1/marketplaces/TEST-MPv0uxteFANO0h9xY5c6Lrq}');

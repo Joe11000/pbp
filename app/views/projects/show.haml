@@ -48,7 +48,7 @@
               %br 
               = link_to "Updates", project_updates_url(@project)
             - else
-              = link_to 'Give To Project', new_user_url, class: 'btn btn-lrg'
+              = link_to 'Give To Project', new_user_url, class: 'btn btn-large'
             %h6 This project will be funded on
             %p= @project.deadline.strftime("%m/%d/%Y")
             %hr
@@ -56,6 +56,10 @@
               = link_to "Edit This Project", edit_project_url(@project), class: 'btn btn-lrg'
               %hr
               = link_to "Add an Update", new_project_update_url(@project)
+              %br
+              %br
+            - if @project.funded?
+              = link_to "Add Bank Account", user_bankaccounts_url(current_user), class: "btn btn-large"
         %br
         .blog-side
           .side-box

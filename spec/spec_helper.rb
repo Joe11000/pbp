@@ -3,6 +3,7 @@ require 'spork'
 require 'simplecov'
 require 'vcr_setup'
 require 'webmock/rspec'
+require 'capybara/poltergeist'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do
@@ -105,6 +106,12 @@ Spork.prefork do
 
     config.mock_with :rspec
 
+    Capybara.register_driver :poltergeist do |app|
+        Capybara::Poltergeist::Driver.new(app)
+    end
+
+    Capybara.javascript_driver = :poltergeist
+
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.clean_with(:truncation)
@@ -125,6 +132,5 @@ Spork.prefork do
 end
 
 Spork.each_run do
-  # This code will be run each time you run your specs.
 
 end

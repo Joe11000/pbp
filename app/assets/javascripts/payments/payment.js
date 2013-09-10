@@ -9,7 +9,6 @@ $(function() {
       postal_code: form.find("#post_code").val()
     }
     balanced.card.create(creditCardData, function(response) {
-      data = {data: response.data, error: response.error, status: response.status}
       $.post("payments/", response, function(response) {
         window.location.href = response.redirect_to
       });

@@ -11,6 +11,9 @@
 %hr.hr-spacer.space35
 #blog
   .container
+    - if flash[:bank_success]
+      .alert{class: 'alert-success'}
+        = flash[:bank_success]
     .row-fluid
       .span4
         .blog-side
@@ -27,7 +30,6 @@
               = @user.email
               %hr
               = link_to "Edit Profile", edit_user_url(@user), class: "btn btn-large"
-
       .span8
         .blog-list
           .blog-post

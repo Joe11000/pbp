@@ -64,6 +64,7 @@
               - if can? :edit, @project
                 %li
                   = link_to "Edit This Project", edit_project_url(@project)
+                  = link_to "Add an Update", new_project_update_url(@project)
           .side-box
             .page-headline
               %h3 Givers

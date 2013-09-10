@@ -24,7 +24,7 @@ group :assets do
   gem 'therubyracer'
 end
 
-group :development, :test do 
+group :development, :test do
   gem 'rspec-rails'
   gem 'binding_of_caller'
   gem 'spork-rails'

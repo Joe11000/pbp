@@ -1,0 +1,11 @@
+%h2 Times available to donate your time
+
+%h4= "#{@events[0].start_time.strftime("Printed on %m/%d/%Y")}"
+
+= form_tag(project_user_availabilities_url) do
+  - @events.each do |e|
+    = label_tag("#{e.start_time.hour % 12}" + "#{(e.start_time.hour < 12 ? " am" : " pm")}")
+    = check_box_tag("event_id[#{e.id}]", "#{e.id}")
+  %br
+  %br
+  = submit_tag("Confirm Hours")

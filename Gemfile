@@ -14,6 +14,7 @@ gem 'faker'
 gem 'font-awesome-rails'
 gem 'roadie'
 gem 'redcarpet'
+gem "simple_calendar", "~> 0.1.9"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -33,6 +34,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'debugger'
 end
 
 group :test do

@@ -4,13 +4,19 @@ class Ability
   def initialize(current_user)
     if current_user
       can [:destroy, :edit, :update], Project, owner_id: current_user.id
-      can [:index, :new, :create, :show], Project
+      can [:create, :index, :new, :show], Project
 
       can [:destroy, :edit, :update], Donation, user_id: current_user.id
       can [:create, :index, :new, :show], Donation
 
       can [:destroy, :edit, :update], User, id: current_user.id
-      can [:index, :new, :create, :show], User
+      can [:index, :new, :show], User
+
+      can [:new, :destroy, :edit, :update], Event, user_id: current_user.id
+      can [:index, :show], Event
+
+      can [:destroy, :edit, :update], Commitment, user_id: current_user.id
+      can [:index, :new, :show], Commitment
     else
       can [:create, :index, :new, :show], User
       can [:index, :show], Project

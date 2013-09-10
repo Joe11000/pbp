@@ -1,0 +1,36 @@
+#home
+  .container
+    .row-fluid
+      .project_id{ data: {id: @project.id }}
+      %br
+      .span12
+        = calendar @events, empty_date: lambda { |date| } do |event|
+          = " "
+      .clearfix
+      .span12
+        = link_to "Submit", project_url(@project), id: "submit", class: "btn btn-primary pull-right"
+      .clearfix
+
+      #myModal.modal.hide.fade
+        .modal-header
+          .close{data: {dismiss: "modal"}}
+          .h3 Hours Available
+        .modal-body
+          %table.table.table-bordered{style: "width: 100%"}
+            %tr
+              %th.top{style: "width: 7.7%"}
+              - (1..12).to_a.each do |i|
+                %th.top{style: "width: 7.7%"}= i
+            %tr
+              %td{style: "width: 7.7%"}= "AM"
+              - (1..12).to_a.each do |i|
+                %td.hours{style: "width: 7.7%", id: "#{i - 1}"}
+            %tr
+              %td{style: "width: 7.7%"}= "PM"
+              - (1..12).to_a.each do |i|
+                %td.hours{style: "width: 7.7%", id: "#{i + 11}"}
+        .modal-footer
+          %button#save.btn.pull-right
+            Save
+
+= javascript_include_tag "calender/user", "calender/month", "calender/day", "calender/hour"

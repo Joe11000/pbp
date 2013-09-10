@@ -12,13 +12,14 @@ describe "Homepage" do
     end
 
     it "can login" do
-      add_user_mock(uid: "1234")
       project = FactoryGirl.create(:project)
+
+      add_user_mock(uid: "1234")
 
       visit root_url
 
       click_link "Sign In With Facebook"
-      
+
       page.should have_content "Sign Out"
     end
   end
@@ -26,7 +27,7 @@ describe "Homepage" do
   context "user" do
     it "can view projects" do
       project = FactoryGirl.create(:project)
-      
+
       visit root_url
 
       click_link "Sign In With Facebook"

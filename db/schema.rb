@@ -45,9 +45,8 @@ ActiveRecord::Schema.define(:version => 20130910173800) do
   create_table "updates", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.date     "update_date"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "project_id"
   end
 
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20130910173800) do
     t.string   "fb_oauth_expires_at"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.string   "balanced_customer_uri"
     t.string   "twitter_uid"
     t.string   "twitter_nickname"
     t.string   "twitter_avatar_url"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20130910173800) do
     t.string   "avatar"
     t.string   "password_digest"
     t.boolean  "admin",                 :default => false
-    t.string   "balanced_customer_uri"
   end
 
 end

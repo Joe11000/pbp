@@ -11,7 +11,7 @@ class MediafilesController < ApplicationController
     if @mediafile.persisted?
       redirect_to project_url(@project)
     else
-      flash[:notice] = "dont be a muggle...learn how to load your photos."
+      flash[:notice] = "dont be a muggle...learn how to load your photos." # I still challenge the fact that you guys use flash for form error messages
       render :new
     end
   end
@@ -35,7 +35,7 @@ class MediafilesController < ApplicationController
       flash[:notice] = "Successfully Updated"
       redirect_to project_url(project)
     else
-      flash.now[:notice] = 'Failed To Update'
+      flash.now[:notice] = 'Failed To Update' # I still challenge the fact that you guys use flash for form error messages
       render :edit
     end
   end

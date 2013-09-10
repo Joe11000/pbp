@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_url(@user)
     else
-      flash[:notice] = "User Creation Failed"
+      flash[:notice] = "User Creation Failed" # I still challenge the fact that you guys use flash for form error messages
       render :new
     end
   end

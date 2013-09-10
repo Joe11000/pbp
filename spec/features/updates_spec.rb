@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'User Can Update Project' do
-  it 'owner can add title and text to updates' do
+describe 'Updates' do
+  it 'owner can create and view' do
     project = FactoryGirl.create(:project)
 
     add_user_mock
@@ -21,5 +21,22 @@ describe 'User Can Update Project' do
      }.to change(Update, :count).by 1
 
      page.should have_text("My Project Update")
+  end
+
+  it "can edit, update and delete Updates" do
+    project = FactoryGirl.create(:project)
+    update  = FactoryGirl.create(:update)
+
+    add_user_mock
+
+    visit_root_url
+
+    click_link "Sign In With Facebook"
+
+    visit project_url(project)
+
+    click_link 'Updates' #this should show all updates
+
+
   end
 end

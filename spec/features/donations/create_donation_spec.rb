@@ -5,14 +5,14 @@ describe "Creating Donations" do
     it "can't visit donation#new page" do
       project = FactoryGirl.create(:project)
 
-      visit new_project_donation_url(project.id)   
+      visit new_project_donation_url(project.id)
 
         project = FactoryGirl.create(:project)
-        
+
         visit root_url
 
         # should be redirected to a different page now
-        page.should_not have_css("#project_title") 
+        page.should_not have_css("#project_title")
         expect(Project.last.title).to eq "Pretzels Project Title"
 
       page.should have_content("Support local projects with your time or money.")
@@ -27,10 +27,10 @@ describe "Creating Donations" do
 
       click_link "Sign In With Facebook"
 
-      visit new_project_donation_url(project)   
+      visit new_project_donation_url(project)
 
       page.should have_css("#donation_hours")
-      page.should have_css("#donation_dollar_amount") 
+      page.should have_css("#donation_dollar_amount")
     end
   end
 end

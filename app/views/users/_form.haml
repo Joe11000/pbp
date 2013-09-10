@@ -1,6 +1,5 @@
 = form_for @user do |f|
-  = f.text_field :nickname
-  / - if first_name = @user.errors.messages[:first_name]
+  = f.text_field :nickname, placeholder: "Nickname"
   = f.text_field :first_name, placeholder: "First Name"
   = f.text_field :last_name, placeholder: "Last Name"
   = f.text_field :email, placeholder: "Email"
@@ -9,7 +8,6 @@
   = f.password_field :password_confirmation, placeholder: "Password Confirmation"
   %br
   = f.submit class: 'btn btn-large'
-  = f.hidden_field :password_digest
   = f.hidden_field :fb_uid
   = f.hidden_field :fb_nickname
   = f.hidden_field :fb_avatar_url

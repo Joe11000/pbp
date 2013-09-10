@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908182800) do
+ActiveRecord::Schema.define(:version => 20130910173800) do
 
   create_table "donations", :force => true do |t|
     t.integer  "user_id",                      :null => false
@@ -42,6 +42,14 @@ ActiveRecord::Schema.define(:version => 20130908182800) do
     t.datetime "deadline",                   :null => false
   end
 
+  create_table "updates", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "project_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "first_name"
@@ -54,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20130908182800) do
     t.string   "fb_oauth_expires_at"
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+    t.string   "balanced_customer_uri"
     t.string   "twitter_uid"
     t.string   "twitter_nickname"
     t.string   "twitter_avatar_url"
@@ -64,7 +73,6 @@ ActiveRecord::Schema.define(:version => 20130908182800) do
     t.string   "avatar"
     t.string   "password_digest"
     t.boolean  "admin",                 :default => false
-    t.string   "balanced_customer_uri"
   end
 
 end

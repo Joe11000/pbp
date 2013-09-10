@@ -1,0 +1,5 @@
+%h1 THIS IS THE UPDATE PAGE. 
+= form_for [@project, @update] do |f|
+ = f.text_field :title
+ = f.text_area  :body
+ = f.submit "Create Update"

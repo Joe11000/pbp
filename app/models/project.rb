@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_many   :donations
   has_many   :donators, through: :donations, source: :user
   has_many   :mediafiles
+  has_many   :updates
 
   validates_presence_of :owner, :title, :description, :deadline
   validates_uniqueness_of :title

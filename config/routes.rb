@@ -15,6 +15,10 @@ ParkBenchProjects::Application.routes.draw do
     resources :mediafiles
   end
 
+  resources :projects do
+    resources :updates
+  end
+
   resources :users
 
   get 'starts', to: 'starts#index'

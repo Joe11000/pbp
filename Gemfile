@@ -29,6 +29,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'binding_of_caller'
   gem 'spork-rails'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

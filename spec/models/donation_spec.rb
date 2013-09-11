@@ -1,7 +1,14 @@
 require 'spec_helper'
 
 describe Donation do
+
   let(:donation) { FactoryGirl.create(:donation) }
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
 
   it "has a valid factory" do
     donation.should be_valid

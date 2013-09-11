@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe 'Mediafile attachment to project' do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   it 'owner can embed media in their project' do
     project = FactoryGirl.create(:project)
 

@@ -1,6 +1,13 @@
 require "spec_helper"
 
 describe "Project Viewing" do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   context "visitor" do
     it "can see all projects" do
       project = FactoryGirl.create(:project)

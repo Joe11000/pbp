@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe "Project Creation" do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   context "user" do
     it "can create project" do
         project = FactoryGirl.create(:project)

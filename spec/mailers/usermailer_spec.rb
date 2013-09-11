@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe UserMailer do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   context 'it formats the welcome email properly' do
     let(:user) { FactoryGirl.create(:user) }
     let(:mail) { UserMailer.welcome_email(user) }

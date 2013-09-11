@@ -38,8 +38,8 @@
             %h4 backers
             %h1= @project.hours_donated.to_s
             %h4= "hours pledged of " + @project.hour_goal.to_s
-            %h1= "$ " + @project.dollars_donated.to_s
-            %h4= "pledged of $" + @project.dollar_goal.to_s + " goal"
+            %h1= "$ " + @project.get_dollars_donated.to_s
+            %h4= "pledged of $" + @project.get_dollar_goal.to_s + " goal"
             %h1= @project.time_remaining.to_s
             %h4 days to go
             %hr

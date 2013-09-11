@@ -13,6 +13,6 @@
   = f.label :hour_goal, "Hour Goal"
   = f.number_field :hour_goal, { min: 0, step: 1 }
   = f.label :dollar_goal
-  = f.number_field :dollar_goal, { min: 0, max: 1000000, step: 5}
+  = f.number_field :dollar_goal, { min: 0, max: 100000, step: 5}
   %br
   = f.submit class: "btn btn-lrg"

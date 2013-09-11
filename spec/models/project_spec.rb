@@ -41,21 +41,21 @@ describe Project do
   end
 
   context "has a method dollars donated" do
-    it { should respond_to(:dollars_donated) }
+    it { should respond_to(:get_dollars_donated) }
 
     it "should call method dollar_amount on each associated donation" do
       project.donations << donation
-      expect(project.dollars_donated).to eq donation.dollar_amount
+      expect(project.get_dollars_donated).to eq donation.get_dollar_amount
     end
   end
 
   context "has a method dollars remaining" do
-    it { should respond_to(:dollars_remaining) }
+    it { should respond_to(:get_dollars_remaining) }
 
     it "should subtract dollars goal from dollars donated" do
       project.donations << donation
-      expected = project.dollar_goal - donation.dollar_amount
-      expect(project.dollars_remaining).to eq expected
+      expected = project.get_dollar_goal - donation.get_dollar_amount
+      expect(project.get_dollars_remaining).to eq expected
     end
   end
 
@@ -75,8 +75,8 @@ describe Project do
     end
 
     it "should return true when a project is funded" do
-      donation.dollar_amount = 10000000
-      donation.hours = 1000000
+      donation.dollar_amount = 100_000
+      donation.hours = 100_000
       donation.save
       project.donations << donation
       expect( project.funded? ).to be_true

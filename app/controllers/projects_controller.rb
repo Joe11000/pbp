@@ -12,7 +12,6 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.created_projects.new(params[:project])
     @project.deadline = DateTime.parse(params[:project][:deadline])
-
     if @project.save
       @project.strip_media
       flash[:notice] = "Thank you!"

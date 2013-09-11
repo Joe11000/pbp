@@ -45,6 +45,7 @@ describe "User Creation Process, Anonymous Visitor" do
     click_link "Sign In / Sign Up"
 
     expect{
+      fill_in 'user_nickname', with: "Mattyice"
       fill_in 'user_first_name', with: "Matt"
       fill_in 'user_last_name', with: "Thaler"
       fill_in 'user_email', with: "mthaler@gmail.com"

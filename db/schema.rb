@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130908182800) do
+ActiveRecord::Schema.define(:version => 20130910141711) do
 
   create_table "donations", :force => true do |t|
     t.integer  "user_id",                      :null => false
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20130908182800) do
     t.integer  "dollar_amount", :default => 0
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "project_id"
+    t.date     "date"
+    t.integer  "hour"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "mediafiles", :force => true do |t|
@@ -40,6 +48,11 @@ ActiveRecord::Schema.define(:version => 20130908182800) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.datetime "deadline",                   :null => false
+  end
+
+  create_table "user_availabilities", :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_id"
   end
 
   create_table "users", :force => true do |t|

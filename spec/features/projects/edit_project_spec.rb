@@ -29,14 +29,14 @@ describe "Project Editing" do
       click_link "Sign In With Facebook"
 
       visit edit_project_url(project)
-      save_and_open_page
+
       page.fill_in "project_title",        with: project.title + " edit"
       page.fill_in "project_description",  with: project.description + " edit"
       page.fill_in "project_deadline",     with: project.deadline + 1
       page.fill_in "project_dollar_goal",  with: project.get_dollar_goal + 5
       page.fill_in "project_hour_goal",    with: project.hour_goal + 5
 
-      save_and_open_page
+
       click_button "Update Project"
 
       current_url.should eq project_url(project)

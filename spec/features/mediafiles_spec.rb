@@ -12,17 +12,9 @@ describe 'Mediafile attachment to project' do
 
     visit edit_project_url(project)
 
-    click_link "Add Media"
-
     expect{
-      fill_in "mediafile_url", with: 'http://www.youtube.com/watch?v=kfVsfOSbJY0'
-      fill_in "mediafile_name", with: 'Rebecca Black Friday'
-      fill_in "mediafile_media_type", with: "video"
+      fill_in "project_description", with: '<iframe width="420" height="315" src="//www.youtube.com/embed/My2FRPA3Gf8" frameborder="0" allowfullscreen></iframe>'
       click_button "Update Project"
       }.to change(Mediafile, :count).by 1
-
-    visit project_url(project)
-
-    page.should have_css('iframe')
   end
 end

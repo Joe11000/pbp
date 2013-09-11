@@ -18,6 +18,10 @@ class Project < ActiveRecord::Base
     hour_goal - hours_donated
   end
 
+  def dollar_goal=(dollar)
+    @dollar_goal = dollar * 100
+  end
+
   def dollars_donated
     self.donations.sum("dollar_amount")
   end
@@ -27,7 +31,9 @@ class Project < ActiveRecord::Base
   end
 
   def time_remaining
-    (deadline.to_i - DateTime.now.to_i) / (24 * 60 * 60)
+    remaining = deadline.to_i - DateTime.now.to_i
+    return remaining / (24 * 60 * 60) if remaining > 24 * 60 * 60
+    remaining / (24 * 60)
   end
 
   def self.charge_ending_projects
@@ -41,5 +47,17 @@ class Project < ActiveRecord::Base
 
   def funded?
     hours_remaining <= 0 && dollars_remaining <= 0
+  end
+
+  def strip_media
+    self.description.scan(/<iframe.*<\/iframe>/).each do |match|
+      self.mediafiles.create(url: match, media_type: "video")
+    end
+
+    self.description.scan(/!\[.*\]\((.*)\)/).each do |match|
+      m = self.mediafiles.create(url: match[0], media_type: "photo" )
+      puts m.valid?
+      puts m.url
+    end
   end
 end

@@ -5,10 +5,9 @@ describe "Project Viewing" do
     it "can see all projects" do
       project = FactoryGirl.create(:project)
 
-      visit projects_url
+      visit root_url
 
       page.should have_content(project.title)
-      page.should have_content(project.description)
     end
 
     it "can see a project" do
@@ -16,27 +15,22 @@ describe "Project Viewing" do
 
       visit project_url(project)
 
-      page.should have_content("Created By:")
-      page.should have_content(project.description)
-      page.should have_content("Project Description:")
-      page.should have_content(project.description)
-      page.should have_content("Givers")
+      page.should have_content(project.title)
+      page.should have_content(project.owner.nickname)
     end
   end
 
   context "user" do
     it "can see all projects" do
       add_user_mock(uid: "Prezzels")
+
       project = FactoryGirl.create(:project)
 
       visit root_url
 
       click_link "Sign In With Facebook"
 
-      visit projects_url
-
       page.should have_content(project.title)
-      page.should have_content(project.description)
     end
 
     it "can see a project" do
@@ -49,11 +43,8 @@ describe "Project Viewing" do
 
       visit project_url(project)
 
-      page.should have_content("Created By:")
-      page.should have_content(project.description)
-      page.should have_content("Project Description:")
-      page.should have_content(project.description)
-      page.should have_content("Givers")
+      page.should have_content(project.title)
+      page.should have_content(project.owner.nickname)
     end
   end
 end

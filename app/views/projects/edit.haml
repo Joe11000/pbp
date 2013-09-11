@@ -10,10 +10,31 @@
 #blog
   .container
     .row-fluid
-      .span6.offset3
+      .span8
         - if flash[:notice]
           .alert{class: 'alert'}
             = flash[:notice]
         .blog-list
           .blog-post
-            = render partial: "form"            = link_to "Add Media", new_project_mediafile_url(@project)
+            = render partial: "form"
+      .span4
+        .blog-side
+          .side-box
+            %h4{style: "text-align: center"} Some Thoughts To Consider For
+            %ul
+              %hr
+              %li
+                You can 
+                = link_to "drop", "http://google.about.com/od/youtube/ss/embed-share-YouTube-videos.htm", class: "label label-info"
+                youtube videos in your description
+              %hr
+              %li
+                You can use 
+                = link_to "markdown", "http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet", class: "label label-info"
+                in your description
+              %hr
+              %li You might want to provide a brief overview
+              %hr
+              %li You might want to provide a history of the project
+              %hr
+              %li You might want to include an FAQ section

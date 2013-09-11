@@ -25,6 +25,18 @@ describe "Project Viewing" do
       page.should have_content(project.title)
       page.should have_content(project.owner.nickname)
     end
+
+    it "can click on a linked project" do
+      project = FactoryGirl.create(:project)
+      mediafile = FactoryGirl.create(:mediafile)
+      project.mediafiles << mediafile
+
+      visit root_url
+
+      click_link "#{project.title}"
+
+      current_url.should eq project_url(project)
+    end
   end
 
   context "user" do

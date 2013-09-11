@@ -10,6 +10,8 @@ class Project < ActiveRecord::Base
   attr_accessible :owner, :title, :description, :hour_goal, :dollar_goal, :find_all_by_deadline, :deadline
   accepts_nested_attributes_for :mediafiles
 
+  before_save   :convert_to_cents_if_dollar_goal_updated
+
   def hours_donated
     self.donations.sum("hours")
   end
@@ -18,16 +20,16 @@ class Project < ActiveRecord::Base
     hour_goal - hours_donated
   end
 
-  def dollar_goal=(dollar)
-    @dollar_goal = dollar * 100
+  def get_dollar_goal
+    (self.dollar_goal / 100.00).floor
   end
 
-  def dollars_donated
-    self.donations.sum("dollar_amount")
+  def get_dollars_donated
+    ((self.donations.sum("dollar_amount"))/ 100.00).floor
   end
 
-  def dollars_remaining
-    dollar_goal - dollars_donated
+  def get_dollars_remaining
+    get_dollar_goal - get_dollars_donated
   end
 
   def time_remaining
@@ -46,7 +48,7 @@ class Project < ActiveRecord::Base
   end
 
   def funded?
-    hours_remaining <= 0 && dollars_remaining <= 0
+    hours_remaining <= 0 && get_dollars_remaining <= 0
   end
 
   def strip_media
@@ -59,5 +61,18 @@ class Project < ActiveRecord::Base
       puts m.valid?
       puts m.url
     end
+  end
+
+
+  private 
+
+  def convert_to_cents_if_dollar_goal_updated
+    if self.id && Project.find(self.id).dollar_goal / 100.00 != self.dollar_goal
+      dollar_goal_to_cents_into_db 
+    end
+  end
+
+  def dollar_goal_to_cents_into_db
+    self.dollar_goal = self.dollar_goal * 100
   end
 end

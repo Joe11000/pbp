@@ -2,4 +2,4 @@
   %tr
     %td= @donation.user.fb_nickname
     %td= @donation.hours.to_s
-    %td= "$" + @donation.dollar_amount.to_s
+    %td= "$" + @donation.get_dollar_amount.to_s

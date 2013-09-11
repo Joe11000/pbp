@@ -17,7 +17,7 @@ class DonationsController < ApplicationController
     @donation.user = current_user if @donation
 
     if @donation.save
-      if @donation.dollar_amount > 0
+      if @donation.get_dollar_amount > 0
         redirect_to project_payments_url
       else
         flash[:notice] = "Successfully Donated"

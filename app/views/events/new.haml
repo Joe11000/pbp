@@ -3,8 +3,7 @@
   = render partial: "calendar"
 .clearfix
 .span12
-  %button#submit.btn.btn-primary.pull-right
-    Submit
+  = link_to "Submit", project_url(@project), id: "submit", class: "btn btn-primary pull-right"
 .clearfix
 
 #myModal.modal.hide.fade
@@ -39,7 +38,7 @@
     $('#submit').click(function(){
       console.log(events)
       $.post('/projects/' + id + '/events', {events: events}, function(response){
-  
+        window.location.href = '/projects/' + id
       });
     })
 
@@ -82,7 +81,6 @@
           $.each( $('.hours'), function(i, value){
             if ($(value).data('checked') === 1){ datetimes.push(value.id) }
           })
-          console.log(datetimes)
           events[date] = datetimes
 
           $.each($('.hours'), function(i, value){

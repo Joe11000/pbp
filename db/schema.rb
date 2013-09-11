@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(:version => 20130910141711) do
 
   create_table "events", :force => true do |t|
     t.integer  "project_id"
-    t.datetime "start_time"
+    t.date     "date"
+    t.integer  "hour"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_many :created_projects, class_name: "Project", foreign_key: :owner_id
   has_many :donations
   has_many :donated_projects, through: :donations, source: :project
-  has_many :user_availabilities, dependent: :destroy
-  has_many :events, through: :user_availabilities
+  has_many :commitments, dependent: :destroy
+  has_many :events, through: :commitments
   
   attr_accessible :donations, :created_projects, :donated_projects, :first_name,
                   :last_name, :email, :location, :password, :password_confirmation

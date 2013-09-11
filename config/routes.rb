@@ -6,7 +6,7 @@ ParkBenchProjects::Application.routes.draw do
 
     resources :events 
 
-    resources :user_availabilities
+    resources :commitments
 
     get 'payments', to: 'payments#show'
     post 'payments', to: 'payments#create'

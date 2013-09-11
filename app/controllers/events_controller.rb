@@ -17,7 +17,10 @@ class EventsController < ApplicationController
   def create
     @project = Project.find(params[:project_id])
     params[:events].each do |day|
-      @project.events.create(start_time:)
+      day[1].each do |hour|
+        @project.events.create(date: Date.parse(day[0]), hour: hour)
+      end
     end
+    render text: "Hi"
   end
 end

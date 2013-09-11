@@ -10,19 +10,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def create
-    @project = Project.find(2)
-    @date = DateTime.now
-
-    params[:hour].values.each do |hour|
-      string = @date.year.to_s + " " + @date.month.to_s + " " + @date.day.to_s + " " + hour
-      temp_date = DateTime.new
-      puts temp_date
-      @project.events.create(start_time: temp_date)
-    end
+  def new
+    @project = Project.find(params[:project_id])
   end
 
-  def new
-
+  def create
   end
 end

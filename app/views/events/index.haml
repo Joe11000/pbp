@@ -1,49 +1,79 @@
 .project_id{ data: {id: @project.id }}
-
-= render partial: "calendar"
+.span12
+  = render partial: "calendar"
+.clearfix
 
 #myModal.modal.hide.fade
   .modal-header
     .close{data: {dismiss: "modal"}}
     .h3 Hours Available
   .modal-body
+    %table.table.table-bordered{style: "width: 100%"}
+      %tr
+        %th.top{style: "width: 7.7%"}
+        - (1..12).to_a.each do |i|
+          %th.top{style: "width: 7.7%"}= i
+      %tr
+        %td{style: "width: 7.7%"}= "AM"
+        - (1..12).to_a.each do |i|
+          %td.hours{style: "width: 7.7%", id: "#{i}"}
+      %tr
+        %td{style: "width: 7.7%"}= "PM"
+        - (1..12).to_a.each do |i|
+          %td.hours{style: "width: 7.7%", id: "#{i + 12}"}
+  .modal-footer
 
 :javascript
   $(function(){
+    $('.day').css('background', 'white')
+    $('.button')
 
     $('.day').click(function(){
-      
+      $('.hours').css('background', 'lightgrey')
       var date = $(this).data("date-iso")
       var id = $('.project_id').data('id')
       
-      $('.modal-checks').remove()
       $('button').remove()
       
       $.get('/projects/' + id + '/events/', {date: date}, function(events){
 
         if(events.length){
-          $('.modal-body').append('<div class="modal-checks"></div>')
-
           $.each(events, function(i, value){
             hours = value.start_time.match(/T(\d{2})/)[1]
-            $('.modal-checks').append('<label for="' + hours + '">' + hours + '</label>')
-            $('.modal-checks').append('<input id="' + hours + '" name="' + hours + '" type="checkbox" value="1" data-event_id="' + value.id + '">')
+              $('.hours#' + hours)
+                .data('checked', false)
+                .data('event_id', value.id)
+                .css('background', 'white')
+                .click(function(){
+                  if($(this).data('checked') == false){
+                    $(this)
+                      .data('checked', true)
+                      .css('background', 'green')
+                  }
+                  else{
+                    $(this)
+                      .data('checked', false)
+                      .css('background', 'white')
+                  }
+                })
           })
 
           var button = $('<button>Submit</button>')
-            .addClass('btn btn-lrg pull-right')
+            .addClass('btn pull-right')
             .click(function(){
               var event_ids = new Array()
-              $.each( $('input'), function(i, value){
-                if (value.checked){event_ids.push($(value).data('event_id')) }
+              
+              $.each( $('.hours'), function(i, value){
+                if ($(value).data('checked') === true){ event_ids.push($(value).data('event_id')) }
               })
+
               $.post('/projects/' + id + '/user_availabilities/', {event_ids: event_ids}, function(response){
-                $('')
+      
               });
               $('#myModal').modal('hide')
             });
 
-          $('.modal-body').append(button)
+          $('.modal-footer').append(button)
           $('#myModal').modal()
         }
       })

@@ -7,8 +7,9 @@ describe "Homepage" do
 
       visit root_url
 
+      save_and_open_page
+
       page.should have_content(project.title)
-      page.should have_content(project.description)
     end
 
     it "can login" do

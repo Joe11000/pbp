@@ -11,12 +11,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = current_user.created_projects.new(params[:project])
+    @project.deadline = DateTime.parse(params[:project][:deadline])
 
-    if @project.valid?
-      flash[:notice] = "Thank You For Giving"
-      @project.save
-      @mediafiles = Mediafile.new
-      redirect_to new_project_mediafiles_url(@project)
+    if @project.save
+      @project.strip_media
+      flash[:notice] = "Thank you!"
+      redirect_to project_url(@project)
     else
       flash.now[:notice] = "Fail"
       render :new
@@ -31,10 +31,11 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update_attributes(params[:project])
+      @project.strip_media
       flash[:notice] = "Successful Update"
       redirect_to project_url(@project)
     else
-      flash.now[:notice] = "Unsuccessful Update"
+      flash[:notice] = "Unsuccessful Update"
       render :edit
     end
   end

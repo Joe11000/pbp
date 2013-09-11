@@ -8,10 +8,10 @@
           %h4= @projects.first.title
           .home-btns
             %a.btn{:href => "/projects/#{@projects.first.id}"}
-              %i.icon-plus>
+              %i.icon-plus
               Back this project
             %a.btn{:href => "#trending-projects"}
-              %i.icon-plus>
+              %i.icon-plus
               See more projects
         .span6
           / %img{:alt => "", :src => "assets/img/park_bench.jpg"}/
@@ -22,7 +22,7 @@
         %h3
           See how you can make an impact today. It's simple.
           %a.btn.cta-btn{:href => "/starts"}
-            %i.icon-plus>
+            %i.icon-plus
             Get Started
 %hr.hr-spacer.space35
 /
@@ -40,24 +40,16 @@
     .row-fluid
       - row.each do |project|
         .span4.content-box-light.feature
-          %h3
-            - if project.funded?
-              = fa_icon "ok-sign"
-            - else
-              = fa_icon "exclamation-sign"
-            = link_to project.title, project_url(project)
-          = project.description
-          %br/
+          - if project.mediafiles.find_by_media_type("photo")
+            %br
+            %img{src: project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }}
+          %h3{style: "text-align: left"}= link_to project.title, project_url(project)
           .dollars
-            %h5 Dollars
-            .progress{class: "progress-striped active"}
+            %h5{style: "text-align: left"} Dollars
+            .progress{class: "progress"}
               .bar{style: "width: #{ (project.dollars_donated / project.dollar_goal.to_f) }%;"}
-            Dollars Donated: $
-            = project.dollars_donated
           .hours
-            %h5 Hours
-            .progress{class: "progress-striped active"}
+            %h5{style: "text-align: left"} Hours
+            .progress{class: "progress"}
               .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 100 }%;"}
-            Hours Committed:
-            = project.hours_donated
     %hr.hr-spacer.space50/

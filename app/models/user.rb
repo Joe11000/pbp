@@ -7,20 +7,26 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :donated_projects, through: :donations, source: :project 
 
+  validates_presence_of :first_name, :last_name, :email, :location, :nickname
+  validates_uniqueness_of :email
+
   attr_accessible :donations, :created_projects, :donated_projects, :first_name,
-                  :last_name, :email, :location, :password, :password_confirmation
+                  :last_name, :email, :location, :password, :password_confirmation,
+                  :fb_uid, :fb_nickname, :fb_avatar_url, :fb_oauth, :fb_oauth_expires_at,
+                  :twitter_uid, :twitter_nickname, :twitter_avatar_url, :twitter_key,
+                  :twitter_secret, :avatar, :nickname, :password_digest
 
   has_secure_password
 
-  def self.find_or_create_from_omniauth(auth)
+  def self.find_or_build_from_omniauth(auth)
     if auth.provider == "facebook"
-      find_or_create_from_facebook(auth)
+      find_or_build_from_facebook(auth)
     elsif auth.provider == "twitter"
-      find_or_create_from_twitter(auth)
+      find_or_build_from_twitter(auth)
     end
   end
 
-  def self.find_or_create_from_facebook(auth)
+  def self.find_or_build_from_facebook(auth)
     if user = self.find_by_fb_uid(auth.uid)
       user
     else
@@ -38,13 +44,12 @@ class User < ActiveRecord::Base
       user.fb_oauth_expires_at = auth.credentials.expires_at
 
       user.password = user.password_confirmation = ""
-      user.password_digest = "facebook-authorized account"
-      user.save
+      user.password_digest = "123facebook-authorized account123"
       user
     end
   end
 
-  def self.find_or_create_from_twitter(auth)
+  def self.find_or_build_from_twitter(auth)
     if user = self.find_by_twitter_uid(auth.uid)
       user
     else
@@ -59,10 +64,18 @@ class User < ActiveRecord::Base
       user.twitter_secret = auth.credentials.secret
 
       user.password = user.password_confirmation = ""
-      user.password_digest = "twitter-authorized account"
-      user.save
+      user.password_digest = "123twitter-authorized account123"
       user
     end
+  end
+
+  def special_save
+    self.save if self.password && self.password_confirmation
+    if self.twitter_uid || self.fb_uid
+      self.password = self.password_confirmation = ""
+      self.password_digest = "123authorized account123"
+    end
+    self.save
   end
 
   # methods for mailers (both testing and sending)

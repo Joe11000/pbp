@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Donation do
   let(:donation) { FactoryGirl.create(:donation) }
 
-  it 'has a valid factory' do
+  it "has a valid factory" do
     donation.should be_valid
   end
 

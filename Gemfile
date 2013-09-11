@@ -13,6 +13,7 @@ gem "cancan", "~> 1.6.10"
 gem 'faker'
 gem 'font-awesome-rails'
 gem 'roadie'
+gem 'redcarpet'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

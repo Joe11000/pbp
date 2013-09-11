@@ -3,9 +3,8 @@
     .container
       .row
         .span12
-          %h1
-            = @project.title
-            %span
+          %h1= @project.title
+          %h3= "by " + @project.owner.nickname
   .container
     .arrow-down
 %hr.hr-spacer.space30/
@@ -27,44 +26,42 @@
       .span8
         .blog-list
           .blog-post
-            %p Created By:
-            %p= @project.owner.fb_nickname
-            %p Project Description:
-            %p= @project.description
-            %hr
-            - @project.mediafiles.each do |file|
-              %p file.name
-              %p file.media_type
-              %iframe{:height => "345", :src => file.url, :width => "420"}
-      /
-        Content Block Sidebar
-        \==================================================
+            = markdown.render(@project.description).html_safe
+            %hr.frame
+            /
+        /Content Block Sidebar
+        /==================================================
       .span4
         .blog-side
           .side-box
+            %h1= @project.donators.size
+            %h4 backers
+            %h1= @project.hours_donated.to_s
+            %h4= "hours pledged of " + @project.hour_goal.to_s
+            %h1= "$ " + @project.dollars_donated.to_s
+            %h4= "pledged of $" + @project.dollar_goal.to_s + " goal"
+            %h1= @project.time_remaining.to_s
+            %h4 days to go
+            %hr
+            - if can? :create, Donation
+              = link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
+            - else
+              = link_to 'Give To Project', new_user_url, class: 'btn btn-lrg'
+            %h6 This project will be funded on
+            %p= @project.deadline
+            %hr
+            - if can? :edit, @project
+              = link_to "Edit This Project", edit_project_url(@project), class: 'btn btn-lrg'
+        %br
+        .blog-side
           .side-box
-            .page-headline
-              %h3 Data 4 Projects Page.
-            %ul.unstyled
-              %li
-                $
-                = @project.dollars_donated
-                donated of $
-                = @project.dollar_goal
-                goal
-              %li
-                = @project.hours_donated
-                hours committed of
-                = @project.hour_goal
-                hour goal
-              - if can? :create, Donation
-                %li= link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
-              - else
-                %li= link_to 'Give To Project', new_user_url, class: 'btn btn-lrg'
-              - if can? :edit, @project
-                %li
-                  = link_to "Edit This Project", edit_project_url(@project)
-          .side-box
-            .page-headline
-              %h3 Givers
-            = render template: 'donations/index'
+            %img{src: "#{@project.owner.avatar}"}
+            %h4 Project By
+            %h4= link_to @project.owner.nickname, user_url(@project.owner)
+:javascript
+  $(function(){
+    $('iframe').css('width', $('.frame').css('width'))
+    $(window).resize(function(){
+      $('iframe').css('width', $('.frame').css('width'))
+    })
+  })

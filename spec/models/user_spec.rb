@@ -102,7 +102,7 @@ describe User do
     end
 
     it "should return an existing user with that facebook id" do
-      FactoryGirl.build(:user)
+      FactoryGirl.create(:user)
       expect( User.find_or_build_from_facebook(add_user_mock).fb_uid ).to eq "1234"
     end
   end

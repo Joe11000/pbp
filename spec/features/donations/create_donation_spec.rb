@@ -7,15 +7,9 @@ describe "Creating Donations" do
 
       visit new_project_donation_url(project.id)
 
-        project = FactoryGirl.create(:project)
+      project = FactoryGirl.create(:project)
 
-        visit root_url
-
-        # should be redirected to a different page now
-        page.should_not have_css("#project_title")
-        expect(Project.last.title).to eq "Pretzels Project Title"
-
-      page.should have_content("Support local projects with your time or money.")
+      current_url.should eq new_user_url
     end
   end
 
@@ -29,8 +23,7 @@ describe "Creating Donations" do
 
       visit new_project_donation_url(project)
 
-      page.should have_css("#donation_hours")
-      page.should have_css("#donation_dollar_amount")
+      current_url.should eq new_project_donation_url(project)
     end
   end
 end

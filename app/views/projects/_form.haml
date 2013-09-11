@@ -6,10 +6,13 @@
   })
 
 = form_for @project do |f|
-  = f.text_field :title, placeholder: "Title"
-  = f.text_area :description, placeholder: "Description"
+  = f.text_field :title, placeholder: "Title", style: "width: 95%"
+  = f.text_area :description, placeholder: "Description", size: "20x10", style: "width: 95%"
+  = f.label :dealine, "Deadline"
   = f.text_field :deadline, placeholder: 'Deadline'
+  = f.label :hour_goal, "Hour Goal"
   = f.number_field :hour_goal, { min: 0, step: 1 }
-  = f.number_field :dollar_goal, { min: 0, max: 1000000, step: 5 }
+  = f.label :dollar_goal
+  = f.number_field :dollar_goal, { min: 0, max: 1000000, step: 5}
   %br
   = f.submit class: "btn btn-lrg"

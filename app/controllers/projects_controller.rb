@@ -14,10 +14,9 @@ class ProjectsController < ApplicationController
     @project.deadline = DateTime.parse(params[:project][:deadline])
 
     if @project.save
+      @project.strip_media
       flash[:notice] = "Thank You For Giving"
-      @project.save
-      @mediafiles = Mediafile.new
-      redirect_to new_project_mediafiles_url(@project)
+      redirect_to project_url(@project)
     else
       flash.now[:notice] = "Fail"
       render :new

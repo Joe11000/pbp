@@ -2,6 +2,9 @@
 .span12
   = render partial: "calendar"
 .clearfix
+.span12
+  = link_to "Submit", project_url(@project), id: "submit", class: "btn btn-primary pull-right"
+.clearfix
 
 #myModal.modal.hide.fade
   .modal-header
@@ -29,7 +32,7 @@
   var commitments = {}
 
   $(function(){
-    
+
     var id = $('.project_id').data('id')
     $('.day')
       .css('background', 'white')
@@ -64,7 +67,7 @@
         prepare_hours()
         var date = day.data("date-iso")
         $('.modal-body').data('date', date)
-        
+
         $.each(events, function(day, value){
           if(value.date == date){
             $('.hours#' + value.hour)
@@ -72,7 +75,16 @@
               .data('value', value)
               .css('background', 'white')
           }
-        })    
+        })
+
+        if(date in commitments){
+          $.each(commitments[date], function(i, value){
+            $('.hours#' + value.hour)
+              .data('checked', 1)
+              .css('background', 'green')
+          })
+        }
+
         $('#myModal').modal()
       }
     })
@@ -81,18 +93,23 @@
       var commit = new Array()
       $.each( $('.hours'), function(i, value){
         if($(value).data('checked') === 1){
-          commit.push($(value).data('event_id'))
+          commit.push($(value).data('value'))
         }
       })
       var date = $('.modal-body').data('date')
-      commitments[date] == commit
+      commitments[date] = commit
       paint_calender()
       $('#myModal').modal('hide')
     })
 
     $('#submit').click(function(){
-      $.post('/projects/' + id + '/commitments/', {commitments: commitments}, function(response){
-
+      var event_ids = new Array()
+      $.each(commitments, function(i, day){
+        $.each(day, function(i, event){
+          event_ids.push(event.id)
+        })
+      })
+      $.post('/projects/' + id + '/commitments/', {event_ids: event_ids}, function(response){
       })
     })
   })
@@ -105,8 +122,14 @@
   }
 
   function paint_calender(){
-    console.log(commitments)
+    $.each($('.day'), function(i, value){
+      if($(value).data('valid') === 1){
+        $(value).css('background', 'yellow')
+      }
+    })
     $.each(commitments, function(i, value){
-      console.log(value)
+      if(value.length){
+        $('[data-date-iso="' + i + '"]').css('background', 'green')
+      }
     })
   }

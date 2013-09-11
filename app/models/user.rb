@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :donated_projects, through: :donations, source: :project
   has_many :commitments, dependent: :destroy
   has_many :events, through: :commitments
-  
+
   attr_accessible :donations, :created_projects, :donated_projects, :first_name,
                   :last_name, :email, :location, :password, :password_confirmation
 

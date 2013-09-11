@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(:version => 20130910141711) do
 
+  create_table "commitments", :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+  end
+
   create_table "donations", :force => true do |t|
     t.integer  "user_id",                      :null => false
     t.integer  "project_id",                   :null => false
@@ -39,11 +44,6 @@ ActiveRecord::Schema.define(:version => 20130910141711) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
     t.datetime "deadline",                   :null => false
-  end
-
-  create_table "user_availabilities", :force => true do |t|
-    t.integer "user_id"
-    t.integer "event_id"
   end
 
   create_table "users", :force => true do |t|

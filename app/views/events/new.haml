@@ -59,7 +59,7 @@
     $('.day').click(function(){
       var day = $(this)
       var date = day.data("date-iso")
-      
+
       $('#save').remove()
       $('.hours')
         .css('background', 'white')
@@ -77,7 +77,7 @@
         .addClass('btn pull-right')
         .click(function(){
           var datetimes = new Array()
-          
+
           $.each( $('.hours'), function(i, value){
             if ($(value).data('checked') === 1){ datetimes.push(value.id) }
           })

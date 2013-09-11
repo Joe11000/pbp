@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe User do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   let(:user) { FactoryGirl.create(:user) }
 
   let(:bank_account) {{:account_number => '9900000002',

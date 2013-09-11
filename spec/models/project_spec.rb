@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Project do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   let!(:project) { FactoryGirl.create(:project) }
   let(:donation) { FactoryGirl.create(:donation) }
 

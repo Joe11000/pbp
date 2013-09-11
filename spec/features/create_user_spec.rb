@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe "User Creation Process, Anonymous Visitor" do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   it "signs up with twitter and is prompted to add firstname and lastname" do
     project = FactoryGirl.create(:project)
 

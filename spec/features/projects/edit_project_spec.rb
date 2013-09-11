@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe "Project Editing" do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   context "visitor" do
     it "can't edit a project" do
       project = FactoryGirl.create(:project)

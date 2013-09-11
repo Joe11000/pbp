@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe "Creating Donations" do
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   context "visitor" do
     it "can't visit donation#new page" do
       project = FactoryGirl.create(:project)

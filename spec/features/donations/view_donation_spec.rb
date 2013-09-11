@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe "View Donation" do 
+
+  around(:each) do |example|
+    VCR.use_cassette('balanced') do
+      example.run
+    end
+  end
+
   context "visitor" do
     it "can view all donations" do
       donation = FactoryGirl.create(:donation)

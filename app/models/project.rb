@@ -68,7 +68,9 @@ class Project < ActiveRecord::Base
   private 
 
   def convert_to_cents_if_dollar_goal_updated
-    if self.id && Project.find(self.id).dollar_goal / 100.00 != self.dollar_goal
+    if ! self.id
+      dollar_goal_to_cents_into_db
+    elsif Project.find(self.id).dollar_goal / 100.00 != self.dollar_goal
       dollar_goal_to_cents_into_db 
     end
   end

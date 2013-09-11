@@ -14,7 +14,7 @@
       %h2 How much can you give?
       = form_for [@project, @donation] do |f|
         %h3 give hours
-        = f.text_field :hours, {min: 0, step: 1, class: "span6", value: 5}
+        = f.text_field :hours, {min: 0, step: 1, class: "span6"}
         %h3 give money
         = f.text_field :dollar_amount, {min: 0, step: 1, class: "span6"}
         %br

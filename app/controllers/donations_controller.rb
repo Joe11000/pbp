@@ -31,7 +31,7 @@ class DonationsController < ApplicationController
   end
 
   def edit
-    @donation = Donation.find(params["id"])
+    @donation = Donation.find(params[:id])
     @project = @donation.project
   end
 
@@ -48,7 +48,7 @@ class DonationsController < ApplicationController
   end
 
   def show
-    @donation = Donation.find(params["id"])
+    @donation = Donation.find(params[:id])
     @project = @donation.project
   end
 end

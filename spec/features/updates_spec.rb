@@ -29,14 +29,28 @@ describe 'Updates' do
 
     add_user_mock
 
-    visit_root_url
+    visit root_url
 
     click_link "Sign In With Facebook"
 
     visit project_url(project)
 
-    click_link 'Updates' #this should show all updates
+    click_link 'Updates'
 
 
+
+    click_link 'BACON'
+
+
+
+    expect {
+      fill_in 'update_title', with: 'My Project'
+      fill_in 'update_body', with: "It's time to begin..."
+      click_button 'Create Update'
+    }
+    
+   save_and_open_page
+   
+    page.should have_text("My Project")
   end
 end

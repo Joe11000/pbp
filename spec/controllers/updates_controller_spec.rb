@@ -50,6 +50,13 @@ describe UpdatesController do
         should render_template :new
       end
     end 
-  
   end
+
+  describe "#edit" do 
+    it 'should load correct project update' do 
+      get :edit
+      reponse.should be_successful
+    end 
+  end 
+
 end

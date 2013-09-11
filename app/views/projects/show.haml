@@ -59,6 +59,7 @@
                 hour goal
               - if can? :create, Donation
                 %li= link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
+                %li= link_to "Updates", project_updates_url(@project)
               - else
                 %li= link_to 'Give To Project', new_user_url, class: 'btn btn-lrg'
               - if can? :edit, @project

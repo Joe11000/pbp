@@ -7,8 +7,6 @@ describe "Homepage" do
 
       visit root_url
 
-      save_and_open_page
-
       page.should have_content(project.title)
     end
 

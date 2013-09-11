@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20130910141711) do
   end
 
   create_table "events", :force => true do |t|
+    t.integer  "project_id"
     t.datetime "start_time"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

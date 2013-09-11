@@ -1,0 +1,19 @@
+%h2 Project Time Span
+
+= form_tag(project_events_url) do
+
+  - for i in 1..23 
+    - if i < 12
+      = label_tag("#{i} am")
+      = check_box_tag("hour[#{i}]", "#{i}")
+    - elsif i == 12
+      = label_tag("12 pm")
+      = check_box_tag("hour[12]", "12")
+    - else
+      = label_tag("#{i % 12} pm")
+      = check_box_tag("hour[#{i}]", "#{i}")
+    %br
+    %br
+  %br
+  %br
+  = submit_tag("Set Hours")

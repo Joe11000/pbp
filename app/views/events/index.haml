@@ -1,0 +1,51 @@
+.project_id{ data: {id: @project.id }}
+
+= render partial: "calendar"
+
+#myModal.modal.hide.fade
+  .modal-header
+    .close{data: {dismiss: "modal"}}
+    .h3 Hours Available
+  .modal-body
+
+:javascript
+  $(function(){
+
+    $('.day').click(function(){
+      
+      var date = $(this).data("date-iso")
+      var id = $('.project_id').data('id')
+      
+      $('.modal-checks').remove()
+      $('button').remove()
+      
+      $.get('/projects/' + id + '/events/', {date: date}, function(events){
+
+        if(events.length){
+          $('.modal-body').append('<div class="modal-checks"></div>')
+
+          $.each(events, function(i, value){
+            hours = value.start_time.match(/T(\d{2})/)[1]
+            $('.modal-checks').append('<label for="' + hours + '">' + hours + '</label>')
+            $('.modal-checks').append('<input id="' + hours + '" name="' + hours + '" type="checkbox" value="1" data-event_id="' + value.id + '">')
+          })
+
+          var button = $('<button>Submit</button>')
+            .addClass('btn btn-lrg pull-right')
+            .click(function(){
+              var event_ids = new Array()
+              $.each( $('input'), function(i, value){
+                if (value.checked){event_ids.push($(value).data('event_id')) }
+              })
+              $.post('/projects/' + id + '/user_availabilities/', {event_ids: event_ids}, function(response){
+                $('')
+              });
+              $('#myModal').modal('hide')
+            });
+
+          $('.modal-body').append(button)
+          $('#myModal').modal()
+        }
+      })
+    })
+  })

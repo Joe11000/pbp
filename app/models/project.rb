@@ -41,4 +41,9 @@ class Project < ActiveRecord::Base
   def funded?
     hours_remaining <= 0 && dollars_remaining <= 0
   end
+
+  def get_events_for_day(date)
+    puts "HERE"
+    self.events.keep_if { |event| event.start_time.strftime("%Y-%m-%d") == date }
+  end
 end

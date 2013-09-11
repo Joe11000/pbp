@@ -109,7 +109,8 @@ describe User do
 
   context "has a method special_save" do
     let(:user) { User.new( first_name: "testy", last_name: "tester",
-                           email: "testy@tester.com", location: "chicago" )}
+                           email: "testy@tester.com", location: "chicago",
+                           nickname: "nuckname")}
 
     it { should respond_to(:special_save) }
 

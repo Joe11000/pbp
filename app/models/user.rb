@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def special_save
-    return self.save if self.password && self.password_confirmation
+    self.save if self.password && self.password_confirmation
     if self.twitter_uid || self.fb_uid
       self.password = self.password_confirmation = ""
       self.password_digest = "123authorized account123"

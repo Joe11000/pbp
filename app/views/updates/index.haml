@@ -1,0 +1,4 @@
+%h1 UPDATES INDEX PAGE
+- @updates.each do |update|
+  %h2= link_to "#{update.title}", project_update_url(update.project.id, update.id)
+  

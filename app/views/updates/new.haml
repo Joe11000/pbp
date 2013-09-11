@@ -1,0 +1,7 @@
+%h1 WELCOME TO THE NEW *** UPDATES **** PAGE
+= form_for [@project, @update] do |f|
+  = f.text_field :title
+  %br
+  = f.text_area  :body
+  %br
+  = f.submit

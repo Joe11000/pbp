@@ -1,0 +1,8 @@
+%h1  UPDATES SHOW PAGE
+
+%h2= @update.project.title
+%h3= @update.title
+%h3= @update.body
+%h3= link_to "Edit", edit_project_update_url(@update.project.id, @update.id)
+%h3= button_to "Delete", {action: :destroy}, method: :delete
+

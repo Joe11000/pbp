@@ -43,7 +43,6 @@ class Project < ActiveRecord::Base
   end
 
   def get_events_for_day(date)
-    puts "HERE"
-    self.events.keep_if { |event| event.start_time.strftime("%Y-%m-%d") == date }
+    self.events.keep_if { |event| event.date.strftime("%Y-%m-%d") == date }
   end
 end

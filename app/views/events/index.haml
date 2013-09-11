@@ -22,60 +22,81 @@
         - (1..12).to_a.each do |i|
           %td.hours{style: "width: 7.7%", id: "#{i + 12}"}
   .modal-footer
+    %button#save.btn.pull-right
+      Save
 
 :javascript
+  var commitments = {}
+
   $(function(){
-    $('.day').css('background', 'white')
-    $('.button')
+    
+    var id = $('.project_id').data('id')
+    $('.day')
+      .css('background', 'white')
+      .data('valid', 0)
+
+    $.get('/projects/' + id + '/events/', function(response){
+      events = response
+      $.each(events, function(i, value){
+        $('[data-date-iso="' + value.date + '"]')
+          .css('background', 'yellow')
+          .data('valid', 1)
+      })
+    }, 'json')
+
+    $('.hours').click(function(){
+      hour = $(this)
+      if(!hour.data('checked') && hour.data('valid')){
+        hour
+          .data('checked', 1)
+          .css('background', 'green')
+      }
+      else if(hour.data('valid')){
+        hour
+          .data('checked', 0)
+          .css('background', 'white')
+      }
+    })
 
     $('.day').click(function(){
-      $('.hours').css('background', 'lightgrey')
-      var date = $(this).data("date-iso")
-      var id = $('.project_id').data('id')
-      
-      $('button').remove()
-      
-      $.get('/projects/' + id + '/events/', {date: date}, function(events){
+      var day = $(this)
+      if(day.data('valid')){
+        prepare_hours()
+        var date = day.data("date-iso")
+        $('.modal-body').data('date', date)
+        
+        $.each(events, function(day, value){
+          if(value.date == date){
+            $('.hours#' + value.hour)
+              .data('valid', 1)
+              .data('value', value)
+              .css('background', 'white')
+          }
+        })    
+        $('#myModal').modal()
+      }
+    })
 
-        if(events.length){
-          $.each(events, function(i, value){
-            hours = value.start_time.match(/T(\d{2})/)[1]
-              $('.hours#' + hours)
-                .data('checked', false)
-                .data('event_id', value.id)
-                .css('background', 'white')
-                .click(function(){
-                  if($(this).data('checked') == false){
-                    $(this)
-                      .data('checked', true)
-                      .css('background', 'green')
-                  }
-                  else{
-                    $(this)
-                      .data('checked', false)
-                      .css('background', 'white')
-                  }
-                })
-          })
-
-          var button = $('<button>Submit</button>')
-            .addClass('btn pull-right')
-            .click(function(){
-              var event_ids = new Array()
-              
-              $.each( $('.hours'), function(i, value){
-                if ($(value).data('checked') === true){ event_ids.push($(value).data('event_id')) }
-              })
-
-              $.post('/projects/' + id + '/user_availabilities/', {event_ids: event_ids}, function(response){
-      
-              });
-              $('#myModal').modal('hide')
-            });
-
-          $('.modal-footer').append(button)
-          $('#myModal').modal()
+    $('#save').click(function(){
+      $.each( $('.hours'), function(i, value){
+        if($(value).data('checked') === 1){
+          commits.push($(value).data('event_id'))
+          commitments.push()
         }
+      })
+      $('#myModal').modal('hide')
+    })
+
+    $('#submit').click(function(){
+      $.post('/projects/' + id + '/commitments/', {commitments: commitments}, function(response){
+
       })
     })
   })
+
+  function prepare_hours(){
+    $('.hours')
+      .css('background', 'lightgrey')
+      .data('valid', 0)
+      .data('checked', 0)
+  }

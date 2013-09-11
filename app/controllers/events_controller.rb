@@ -3,7 +3,7 @@ class EventsController < ApplicationController
       @project = Project.find(params[:project_id]) 
       @events = @project.events
     if request.xhr?
-      @events = @project.get_events_for_day(params[:date])
+      # @events = @project.get_events_for_day(params[:date])
       render json: @events
     else
       render :index

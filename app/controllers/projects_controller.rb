@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       @project.strip_media
-      flash[:notice] = "Thank You For Giving"
+      flash[:notice] = "Thank you!"
       redirect_to project_url(@project)
     else
       flash.now[:notice] = "Fail"

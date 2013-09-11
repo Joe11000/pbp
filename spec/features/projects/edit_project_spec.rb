@@ -54,11 +54,9 @@ describe "Project Editing" do
 
       click_button "Update Project"
 
-      save_and_open_page
-
       page.should have_content("Unsuccessful Update")
 
-      current_url.should eq edit_project_url(project)
+      current_url.should eq project_url(project)
 
     end
 

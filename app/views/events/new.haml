@@ -5,6 +5,7 @@
 .span12
   %button#submit.btn.btn-primary.pull-right
     Submit
+.clearfix
 
 #myModal.modal.hide.fade
   .modal-header
@@ -28,66 +29,79 @@
 
 :javascript
   $(function(){
-    $('.day').css('background', 'white')
+    var id = $('.project_id').data('id')
+    var events = {}
+
+    $('.day')
+      .css('background', 'white')
+      .data('events', 0)
 
     $('#submit').click(function(){
-      
+      console.log(events)
+      $.post('/projects/' + id + '/events', {events: events}, function(response){
+  
+      });
+    })
+
+    $('.hours').click(function(){
+      var hour = $(this)
+      if($(hour).data('checked') === 0){
+        $(hour)
+          .data('checked', 1)
+          .css('background', 'green')
+      }
+      else{
+        $(hour)
+          .data('checked', 0)
+          .css('background', 'white')
+      }
     })
 
     $('.day').click(function(){
       var day = $(this)
       var date = day.data("date-iso")
-      var id = $('.project_id').data('id')
-      $('button').remove()
-
+      
+      $('#save').remove()
       $('.hours')
-        .data('checked', false)
-        .click(function(){
-          if($(this).data('checked') == false){
-            $(this)
-              .data('checked', true)
-              .css('background', 'green')
-          }
-          else{
-            $(this)
-              .data('checked', false)
-              .css('background', 'white')
-          }
-        })
+        .css('background', 'white')
+        .data('checked', 0)
 
-      var button = $('<button>Hide</button>')
+      if(date in events){
+        $.each(events[date], function(i, hour){
+          $('.hours#' + hour)
+            .css('background', 'green')
+            .data('checked', 1)
+        })
+      }
+
+      var button = $('<button id="save">Save</button>')
         .addClass('btn pull-right')
         .click(function(){
           var datetimes = new Array()
           
           $.each( $('.hours'), function(i, value){
-            if ($(value).data('checked') === true){ datetimes.push($(value).data('event_id')) }
+            if ($(value).data('checked') === 1){ datetimes.push(value.id) }
           })
-
-          $.post('/projects/' + id + '/create', {date: date, datetimes: datetimes}, function(response){
-  
-          });
-          
-          var green = false
+          console.log(datetimes)
+          events[date] = datetimes
 
           $.each($('.hours'), function(i, value){
-            if($(value).data('checked') === true && !green){
-               green = true
+            if(datetimes.length){
+              day
+                .data('events', 1)
+                .css('background', 'green')
+            }
+            else{
+              day
+                .data('events', 0)
+                .css('background', 'white')
             }
           })
-
-          if(green){
-            day.css('background', 'green')
-          }
-          else{
-            day.css('background', 'white')
-          }
 
           $('#myModal').modal('hide')
         });
 
       $('.modal-footer').append(button)
       $('#myModal').modal()
-
     })
   })

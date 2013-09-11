@@ -1,6 +1,7 @@
 .project_id{ data: {id: @project.id }}
 .span12
-  = render partial: "calendar"
+  = calendar @events, empty_date: lambda { |date| } do |event|
+    = " "
 .clearfix
 .span12
   = link_to "Submit", project_url(@project), id: "submit", class: "btn btn-primary pull-right"

@@ -80,7 +80,7 @@ def create_description
   description += Faker::Lorem.sentences(5).join(" ")
 end
 
-# create_users(20)
+create_users(20)
 create_projects(10)
 create_projects(5, DateTime.now.midnight)
 create_donations(10)

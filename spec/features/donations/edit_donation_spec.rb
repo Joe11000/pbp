@@ -12,6 +12,7 @@ describe "Donation Editing" do
   end
 
   context "user" do
+    # This functionality has not yet been created, hence why the tests is commented out
     # it "can edit own donations" do
     #   donation = FactoryGirl.create(:donation)
 

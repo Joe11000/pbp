@@ -87,7 +87,7 @@ describe User do
     end
 
     it "should return an existing user with that twitter id" do
-      FactoryGirl.build(:user)
+      FactoryGirl.create(:user)
       auth = add_user_mock(provider: "twitter")
       expect( User.find_or_build_from_twitter(auth).twitter_uid ).to eq "1234"
     end

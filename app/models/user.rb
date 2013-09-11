@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :donations
   has_many :donated_projects, through: :donations, source: :project 
 
-  validates_presence_of :first_name, :last_name, :email, :location
+  validates_presence_of :first_name, :last_name, :email, :location, :nickname
   validates_uniqueness_of :email
 
   attr_accessible :donations, :created_projects, :donated_projects, :first_name,

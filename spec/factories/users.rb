@@ -9,7 +9,8 @@ FactoryGirl.define do
     nickname              "bobbyj"
     fb_avatar_url         "www.pic.com"
     fb_oauth              "1234"
-    password_digest       "apassworddigest"
+    password              "foo"
+    password_confirmation "foo"
     fb_ouath_expires_at = "1"
 
     after(:build) do |user|

@@ -6,6 +6,7 @@ FactoryGirl.define do
     location              "Chicago"
     fb_uid                "1234"
     fb_nickname           "bobbyj"
+    nickname              "bobbyj"
     fb_avatar_url         "www.pic.com"
     fb_oauth              "1234"
     password_digest       "apassworddigest"

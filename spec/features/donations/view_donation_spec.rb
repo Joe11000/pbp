@@ -24,7 +24,7 @@ describe "View Donation" do
 
       page.should have_content(donation.user.fb_nickname)
       page.should have_content(donation.hours)
-      page.should have_content("$" + donation.dollar_amount.to_s)
+      page.should have_content("$" + donation.get_dollar_amount.to_s)
     end
   end
 
@@ -52,7 +52,7 @@ describe "View Donation" do
 
       page.should have_content(donation.user.fb_nickname)
       page.should have_content(donation.hours)
-      page.should have_content("$" + donation.dollar_amount.to_s)
+      page.should have_content("$" + donation.get_dollar_amount.to_s)
     end
   end 
 end

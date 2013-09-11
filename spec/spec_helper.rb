@@ -2,6 +2,7 @@ require 'rubygems'
 require 'spork'
 require 'simplecov'
 require 'vcr_setup'
+require 'webmock/rspec'
 #require 'spork/ext/ruby-debug'
 
 Spork.prefork do

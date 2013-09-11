@@ -26,8 +26,8 @@ class Project < ActiveRecord::Base
     self.donations.sum("dollar_amount")
   end
 
-  def dollars_remaining
-    dollar_goal - dollars_donated
+  def get_dollars_remaining
+    get_dollar_goal - get_dollars_donated
   end
 
   def time_remaining
@@ -59,5 +59,17 @@ class Project < ActiveRecord::Base
       puts m.valid?
       puts m.url
     end
+  end
+
+  private 
+
+  def convert_to_cents_if_dollar_goal_updated
+    if self.id && Project.find(self.id).dollar_goal / 100.00 != self.dollar_goal
+      dollar_goal_to_cents_into_db 
+    end
+  end
+
+  def dollar_goal_to_cents_into_db
+    self.dollar_goal = self.dollar_goal * 100
   end
 end

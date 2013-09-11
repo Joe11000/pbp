@@ -33,8 +33,8 @@ describe "Project Editing" do
       page.fill_in "project_title",        with: project.title + " edit"
       page.fill_in "project_description",  with: project.description + " edit"
       page.fill_in "project_deadline",     with: project.deadline + 1
-      page.fill_in "project_dollar_goal",  with: project.dollar_goal + 5
-      page.fill_in "project_hour_goal",    with: project.dollar_goal + 5
+      page.fill_in "project_dollar_goal",  with: project.get_dollar_goal + 5
+      page.fill_in "project_hour_goal",    with: project.hour_goal + 5
 
       click_button "Update Project"
 
@@ -45,7 +45,7 @@ describe "Project Editing" do
       page.should have_content(project.title)
       page.should have_content(project.description)
       page.should have_content(project.deadline)
-      page.should have_content(project.dollar_goal)
+      page.should have_content(project.get_dollar_goal)
     end
 
     it "can't edit a project unless all required info is provided" do

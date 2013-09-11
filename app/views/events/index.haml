@@ -78,12 +78,15 @@
     })
 
     $('#save').click(function(){
+      var commit = new Array()
       $.each( $('.hours'), function(i, value){
         if($(value).data('checked') === 1){
-          commits.push($(value).data('event_id'))
-          commitments.push()
+          commit.push($(value).data('event_id'))
         }
       })
+      var date = $('.modal-body').data('date')
+      commitments[date] == commit
+      paint_calender()
       $('#myModal').modal('hide')
     })
 
@@ -99,4 +102,11 @@
       .css('background', 'lightgrey')
       .data('valid', 0)
       .data('checked', 0)
+  }
+
+  function paint_calender(){
+    console.log(commitments)
+    $.each(commitments, function(i, value){
+      console.log(value)
+    })
   }

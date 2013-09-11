@@ -47,7 +47,7 @@
           .dollars
             %h5{style: "text-align: left"} Dollars
             .progress{class: "progress"}
-              .bar{style: "width: #{ (project.dollars_donated / project.dollar_goal.to_f) }%;"}
+              .bar{style: "width: #{ (project.get_dollars_donated / project.get_dollar_goal.to_f) }%;"}
           .hours
             %h5{style: "text-align: left"} Hours
             .progress{class: "progress"}

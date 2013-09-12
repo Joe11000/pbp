@@ -52,5 +52,5 @@
                 -else
                   %span.label Not Funded
                 #{project.title} 
-                \- Ends on: #{project.deadline}
+                \- Ends on: #{project.deadline.strftime("%m/%d/%Y")} @ Midnight
                 %br

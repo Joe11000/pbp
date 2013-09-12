@@ -2,6 +2,7 @@ function Month(num, year){
   this.num = num
   this.year = year
   this.valid = 0
+  this.volunteer_hours = 0
   this.dates = []
   this.add_days()
 }
@@ -18,9 +19,9 @@ Month.prototype.add_days = function(){
 Month.prototype.set_valid = function(valid){
   if(valid != null){
     $.each(this.dates, function(i, date){
-      this.valid = valid
       date.set_valid(valid)
     })
+    this.valid = valid
   }
   else{
     var valid_dates = 0
@@ -44,6 +45,16 @@ Month.prototype.get_num = function(){
 
 Month.prototype.get_day = function(day){
   return this.dates[day - 1]
+}
+
+Month.prototype.set_volunteer_hours = function(){
+  var volunteer_hours = 0
+  $.each(this.dates, function(i, day){
+    day.set_volunteer_hours()
+    volunteer_hours += day.set_volunteer_hours()
+  })
+  this.volunteer_hours = volunteer_hours
+  return this.volunteer_hours
 }
 
 function get_month(num, year){

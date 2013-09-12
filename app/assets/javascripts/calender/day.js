@@ -2,7 +2,7 @@ function Day(date){
   this.date = date
   this.valid = 0
   this.hours = new Array()
-  this.volunteers = 0
+  this.volunteer_hours = 0
   this.add_hours()
 }
 
@@ -15,9 +15,9 @@ Day.prototype.add_hours = function(){
 Day.prototype.set_valid = function(valid){
   if(valid != null){
     $.each(this.hours, function(i, hour){
-      this.valid = valid
-      hour.set_valid()
+      hour.set_valid(valid)
     })
+    this.valid = valid
   }
   else{
     var valid_hours = 0
@@ -30,12 +30,13 @@ Day.prototype.set_valid = function(valid){
   }
 }
 
-Day.prototype.set_volunteers = function(){
+Day.prototype.set_volunteer_hours = function(){
   var volunteers = 0
-  $.each(self.hours, function(i, hour){
+  $.each(this.hours, function(i, hour){
     volunteers += hour.volunteers
   })
-  self.volunteers = volunteers
+  this.volunteer_hours = volunteers
+  return this.volunteer_hours
 }
 
 Day.prototype.get_hour = function(hour){

@@ -44,7 +44,7 @@ describe "Project Editing" do
 
       page.should have_content(project.title)
       page.should have_content(project.description)
-      page.should have_content(project.deadline)
+      page.should have_content(project.deadline.strftime("%m/%d/%Y"))
       page.should have_content(project.get_dollar_goal)
     end
 

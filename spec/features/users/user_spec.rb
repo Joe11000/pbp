@@ -115,7 +115,7 @@ describe User do
       click_on "Sign In"
       click_on "View Profile"
 
-      expect( page.has_content?("You Don't Seem to have any projects, go make change:") ).to eq true
+      expect( page.has_content?("You don't seem to have any projects, go make change:") ).to eq true
     end
   end
 end

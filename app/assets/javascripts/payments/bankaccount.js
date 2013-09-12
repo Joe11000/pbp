@@ -1,5 +1,5 @@
 $(function() {
-  $("button").on("click", function(){
+  $("#bank").on("click", function(){
     var form = $("#bankaccount_form");
     var bankAccountData = {
       name: form.find("#name").val(),
@@ -8,7 +8,9 @@ $(function() {
       type: form.find("#account_type").val()
     }
     balanced.bankAccount.create(bankAccountData, function(response) {
-      $.post("/bankaccounts", response.data);
+      $.post("bankaccounts", response, function(response) {
+        window.location.href = response.redirect_to
+      });
     });
   });
 });

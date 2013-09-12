@@ -44,4 +44,5 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'shoulda-matchers'
+  gem 'poltergeist'
 end

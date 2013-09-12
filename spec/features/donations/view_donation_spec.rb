@@ -17,14 +17,15 @@ describe "View Donation" do
       page.should have_css("table.donations")
     end
 
-    it "can view a donations" do
+    it "can view a donation" do
       donation = FactoryGirl.create(:donation)
 
       visit project_donation_url(donation.project, donation)
 
       page.should have_content(donation.user.fb_nickname)
-      page.should have_content(donation.hours)
-      page.should have_content("$" + donation.get_dollar_amount.to_s)
+      page.should have_content(donation.project.title.to_s)
+
+      current_url.should eq project_donation_url(donation.project, donation)
     end
   end
 
@@ -41,7 +42,7 @@ describe "View Donation" do
       page.should have_css("table.donations")
     end
 
-    it "can view a donations" do
+    it "can view a donation" do
       donation = FactoryGirl.create(:donation)
 
       visit root_url
@@ -51,8 +52,9 @@ describe "View Donation" do
       visit project_donation_url(donation.project, donation)
 
       page.should have_content(donation.user.fb_nickname)
-      page.should have_content(donation.hours)
-      page.should have_content("$" + donation.get_dollar_amount.to_s)
+      page.should have_content(donation.project.title)
+
+      current_url.should eq project_donation_url(donation.project, donation)
     end
   end 
 end

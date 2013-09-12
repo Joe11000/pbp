@@ -50,7 +50,7 @@
             - else
               = link_to 'Give To Project', new_user_url, class: 'btn btn-lrg'
             %h6 This project will be funded on
-            %p= @project.deadline
+            %p= @project.deadline.strftime("%m/%d/%Y")
             %hr
             - if can? :edit, @project
               = link_to "Edit This Project", edit_project_url(@project), class: 'btn btn-lrg'

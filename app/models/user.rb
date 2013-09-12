@@ -123,6 +123,6 @@ class User < ActiveRecord::Base
   end
 
   def donations
-      Donation.where(user_id: self.id) if self.id
+    Donation.where(user_id: self.id) if self.id
   end 
 end

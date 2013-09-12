@@ -32,5 +32,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @donations = @user.donations
+    @created_projects = @user.created_projects
   end
 end

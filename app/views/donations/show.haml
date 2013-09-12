@@ -1,5 +1,23 @@
-%table{ class: "projects" }
+%table{ class: "projects donations table table-striped table-bordered table-condensed" }
   %tr
-    %td= @donation.user.fb_nickname
-    %td= @donation.hours.to_s
-    %td= "$" + @donation.get_dollar_amount.to_s
+    %th Owner
+    %th Hours
+    %th Dollars
+    %th Donated To
+  %tr
+    %td
+      %a{href: user_path(@donation.user)}= @donation.user.fb_nickname
+
+    %td= @donation.hours.to_s                    if can? :edit, @donation
+    %td= "$" + @donation.get_dollar_amount.to_s  if can? :edit, @donation
+
+    %td
+      %a{href: project_url(@donation.project)}= @donation.project.title
+
+-if can? :edit, @donation
+  %h3= button_to "Edit Donation", {action: :edit}, method: :get
+
+-if can? :destroy, @donation
+  %h3= button_to "Delete Donation", {action: :destroy}, method: :delete
+
+%h3= button_to "Go back", {action: :index}, method: :get

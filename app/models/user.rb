@@ -121,4 +121,8 @@ class User < ActiveRecord::Base
   def set_bankaccount_token(bankaccount_uri)
     balanced_customer.add_bank_account(bankaccount_uri)
   end
+
+  def donations
+      Donation.where(user_id: self.id) if self.id
+  end 
 end

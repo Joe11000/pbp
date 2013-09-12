@@ -51,4 +51,9 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
     @project = @donation.project
   end
+
+  def destroy
+    Donation.find(params[:id]).destroy
+    redirect_to user_url(Project.find(params[:project_id].owner))
+  end
 end

@@ -4,23 +4,31 @@
       .row.home
         .span12
           %h1 Support local projects with your time or money.
-        .span6
-          %h4= @featured_project.title
-          .span6.feature
+        .span12
+          .span6.pull-left
             - if @featured_project.mediafiles.find_by_media_type("photo")
               %br
               %img{src: @featured_project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }}
-            %h3{style: "text-align: left"}= link_to @featured_project.title, project_url(@featured_project)
+              %h3{style: "text-align: left"}= link_to @featured_project.title, project_url(@featured_project)
+          
+          .span3.pull-left{style: "margin-top: 35px; margin-left: 45px;"}
+            .dollars
+              %h5{style: "text-align: left"}= Dollars Donated - "(#{@featured_project.get_dollars_donated / @featured_project.get_dollar_goal.to_f) / 100}"}
+              .progress{class: "progress"}
+                .bar{style: "width: #{ (@featured_project.get_dollars_donated / @featured_project.get_dollar_goal.to_f) }%;"}
+            .hours
+              %h5{style: "text-align: left"} Hours Donated
+              .progress{class: "progress"}
+                .bar{style: "width: #{ (@featured_project.hours_donated / @featured_project.hour_goal.to_f) * 100 }%;"}
 
-          .home-btns
-            %a.btn{:href => project_url(@featured_project)}
-              %i.icon-plus
-              Back this project
-            %a.btn{:href => "#trending-projects"}
-              %i.icon-plus
-              See more projects
-        .span6
-          / %img{:alt => "", :src => "assets/img/park_bench.jpg"}/
+        .home-btns.span12.clearfix
+          %a.btn{:href => project_url(@featured_project)}
+            %i.icon-plus
+            Back this project
+          %a.btn{:href => "#trending-projects"}
+            %i.icon-plus
+            See more projects
+        
   .home-cta
     .container
       .arrow-down

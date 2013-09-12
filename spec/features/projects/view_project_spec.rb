@@ -28,6 +28,7 @@ describe "Project Viewing" do
 
     it "can click on a linked project" do
       project = FactoryGirl.create(:project)
+      project2 = FactoryGirl.create(:project)
       mediafile = FactoryGirl.create(:mediafile)
       project.mediafiles << mediafile
 

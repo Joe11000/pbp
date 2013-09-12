@@ -1,4 +1,4 @@
-/*   
+/*
 Template Name: Simply Flat - Responsive Bootstrap Template
 Description: Business, Portfolio and Blog Theme.
 Author: Northify
@@ -9,13 +9,13 @@ Website: http://themes.northify.com/simply-flat
 /* Global Styles
 -------------------------------------------------- */
 html,body {
-	background-color: #EDECEA; 
-	height: 100%; font-family: 'Ubuntu',sans-serif !important; 
+	background-color: #EDECEA;
+	height: 100%; font-family: 'Ubuntu',sans-serif !important;
 	color: #3F3F3F; font-weight:400; line-height:23px;
 }
 p {
-	font-size: 18px; 
-	line-height: 1.5; 
+	font-size: 18px;
+	line-height: 1.5;
 	color: #999999;
 }
 h3 {
@@ -23,7 +23,7 @@ h3 {
 }
 a {
 	color: #373737;
-	text-decoration: none; 
+	text-decoration: none;
 	transition: color 0.15s ease-in-out 0s;
 }
 a:hover {
@@ -31,14 +31,14 @@ a:hover {
 	text-decoration: none;
 }
 input[type="text"] {
-	padding: 13px 0 13px 10px; 	
+	padding: 13px 0 13px 10px;
 	margin-bottom: 25px;
 }
 textarea {
 	padding: 15px 0 0 10px;
 }
 .btn {
-	background: none repeat scroll 0 0 #0B676B;	
+	background: none repeat scroll 0 0 #0B676B;
 	background-image: none;
 	border-radius: 0px 0px 0px 0px;
     border: 0 none;
@@ -48,7 +48,7 @@ textarea {
     font-weight: 400;
     height: 50px;
     line-height: 50px;
-    text-shadow: none;    
+    text-shadow: none;
     transition: background 0.5s ease 0s;
 }
 .btn:hover, .btn:focus {
@@ -58,7 +58,7 @@ textarea {
 .content-box {
 	background: none repeat scroll 0 0 #FFFFFF;
 }
-.content-box-light {	
+.content-box-light {
 	background-color: rgba(255, 255, 255, 0.67);
 }
 /* Helpers
@@ -70,7 +70,7 @@ textarea {
 	.space35 {margin: 35px 0;}
 	.space50 {margin: 50px 0;}
 	.space75 {margin: 75px 0;}
-	
+
 
 /* Wrapper for page content to push down footer
 -------------------------------------------------- */
@@ -82,11 +82,11 @@ textarea {
 
 /* Navbar
 -------------------------------------------------- */
-.nav-wrap {	
+.nav-wrap {
 	background: none repeat scroll 0 0 #373737;
 }
 .navbar {
-	margin-bottom: 0px;	
+	margin-bottom: 0px;
 }
 .navbar-inner {
 	background-color: #373737;
@@ -97,7 +97,7 @@ textarea {
 	border: none;
 	border-radius: 0 0 0 0;
 	box-shadow: none;
-	margin: 0 -20px;	
+	margin: 0 -20px;
 }
 .navbar .divider-vertical {
 	height: 20px;
@@ -183,7 +183,9 @@ textarea {
 
 /* Page Headers
 -------------------------------------------------- */
-#page-heading .page-header {margin-top: 0px; margin-bottom: 0px; padding: 40px 0 30px 0; border-bottom: 0px; background: none repeat scroll 0 0 #5ADAE2;}
+#page-heading .page-header {margin-top: 0px; margin-bottom: 0px; padding: 40px 0 30px 0; border-bottom: 0px;
+ background: none repeat scroll 50% 0 #5ADAE2 ;}
+
 #page-heading .page-header .subheader {color: #FFFFFF; font-size: 26px;	font-weight: 400; line-height: 1.35; margin: 15px 0 40px;}
 #page-heading .page-header span {color: #FFFFFF; font-weight: 200;}
 #page-heading .page-header .home {padding-bottom: 60px;}
@@ -270,12 +272,12 @@ textarea {
 }
 #home .feature-set .tile i {
 	color: #FFFFFF;
-	font-size: 108px;	
+	font-size: 108px;
 	margin: 0 10px 0 0;
 	padding: 15px;
 }
 #home .feature-set .tile p {
-	color: #FFFFFF;	
+	color: #FFFFFF;
 	margin-top: 15px;
 	font-weight: 400;
 }
@@ -289,14 +291,14 @@ textarea {
 	color: #FFFFFF;
 }
 #home .blog-tease .blog-tease-pic img {
-	border-right: 5px solid #EDECEA;	
+	border-right: 5px solid #EDECEA;
 }
 #home .blog-tease .blog-tease-info {
-	padding: 0 20px 0 10px;	
+	padding: 0 20px 0 10px;
 }
 #home .blog-tease .blog-tease-info .blog-tease-btn {
 	float:right;
-	padding: 10px 0;	
+	padding: 10px 0;
 }
 
 
@@ -313,7 +315,7 @@ textarea {
 	margin-top: 15px;
 	padding: 10px;
 }
-#about_us .team .team-thumb:hover {	
+#about_us .team .team-thumb:hover {
 	box-shadow: 0 0 8px #DDDDDD;
 	transition: box-shadow 0.2s eass-in-out 0s;
 }
@@ -321,13 +323,13 @@ textarea {
 	color: #5ADAE2;
 }
 #about_us .team ul {
-	text-align:right;	
+	text-align:right;
 }
 #about_us .team ul li i {
 	background: none repeat scroll 0 0 #FFFFFF;
 	color: #373737;
 	font-size: 16px;
-	padding: 3px;	
+	padding: 3px;
 }
 #about_us .team ul li i {
 	background: none repeat scroll 0 0 #EDECEA;
@@ -335,7 +337,7 @@ textarea {
 #about_us .team ul li i:hover {
 	background: none repeat scroll 0 0 #373737;
 	color: #5ADAE2;
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 /* Page - Contact
@@ -393,7 +395,7 @@ textarea {
 	margin-left:20px;
 	text-decoration: none;
 	font-weight: normal;
-	font-size: 12px;	
+	font-size: 12px;
 }
 #blog .blog-list .blog-post .comment .comment-name {
 	font-weight:bold;
@@ -410,7 +412,7 @@ textarea {
 	padding: 20px 30px;
 }
 #blog .blog-side input[type="text"] {
-	padding: 4px 6px ; 	
+	padding: 4px 6px ;
 	margin-bottom: 0px;
 }
 #blog .blog-side .btn-search {
@@ -432,12 +434,12 @@ textarea {
 	width: 50px;
 }
 #blog .blog-side .dl-horizontal dd {
-	margin-left: 66px;    
+	margin-left: 66px;
 }
 #blog .blog-side .dl-horizontal dd p {
 	font-size: 13px;
 	line-height:18px;
-	margin-bottom: 0px;  
+	margin-bottom: 0px;
 }
 #blog .blog-side ul.side-photos li {
 	display: inline-block;
@@ -503,8 +505,8 @@ textarea {
 	line-height: 1.2;
 	font-weight: 200;
 }
-#portfolio ul.thumbnails .thumb .thumb-mask, 
-#portfolio ul.thumbnails .thumb .content {	
+#portfolio ul.thumbnails .thumb .thumb-mask,
+#portfolio ul.thumbnails .thumb .content {
 	position: absolute;
 	overflow: hidden;
 	top: 0;
@@ -514,7 +516,7 @@ textarea {
 	display: block;
 	position: relative
 }
-#portfolio ul.thumbnails .thumb-first .thumb-mask {	
+#portfolio ul.thumbnails .thumb-first .thumb-mask {
 	height: 100%;
 	width: 100%;
 	background-color: rgba(31,200,211,0.9);
@@ -528,7 +530,7 @@ textarea {
 	-ms-transition: all 0.2s 0.4s ease-in-out;
 	transition: all 0.2s 0.4s ease-in-out;
 }
-#portfolio ul.thumbnails .thumb-first:hover .thumb-mask {	
+#portfolio ul.thumbnails .thumb-first:hover .thumb-mask {
 	-ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	filter: alpha(opacity=100);
 	opacity: 1;
@@ -541,9 +543,9 @@ textarea {
 	-moz-transform: translate(0px, 0px);
 	-o-transform: translate(0px, 0px);
 	-ms-transform: translate(0px, 0px);
-	transform: translate(0px, 0px);    
+	transform: translate(0px, 0px);
 }
-#portfolio ul.thumbnails .thumb .thumb-mask .thumb-info {	
+#portfolio ul.thumbnails .thumb .thumb-mask .thumb-info {
 	padding:30px;
 }
 #portfolio .item-details {
@@ -715,7 +717,7 @@ textarea {
 	color: #0AD1E5;
 }
 
-/* Miscellaneous features 
+/* Miscellaneous features
 -------------------------------------------------- */
 .scrolltop {
     background-color: #F1F1F1;
@@ -733,8 +735,8 @@ textarea {
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 @media (max-width: 979px) {
-	.page {padding-top: 0px;}	
-}	
+	.page {padding-top: 0px;}
+}
 @media (max-width: 767px) {
 	.page {padding-top: 0px;
 	}
@@ -800,7 +802,7 @@ textarea {
 		margin: 5px 0 0 20px;
 	}
 	#home .blog-tease .blog-tease-info .blog-tease-btn {
-		float:left;	
+		float:left;
 	}
 	/* Page - Blog */
 	#blog .blog-side {
@@ -811,9 +813,9 @@ textarea {
 		margin-left: 0px !important;
 	}
 	/* Page - Portfolio */
-	#portfolio ul.thumbnails .thumb .thumb-mask .thumb-info {	
+	#portfolio ul.thumbnails .thumb .thumb-mask .thumb-info {
 		padding:30px 10px;
-	}	
+	}
 	#portfolio ul.thumbnails .thumb .thumb-mask p {
 		display:none;
 	}

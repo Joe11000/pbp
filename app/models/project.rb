@@ -65,7 +65,7 @@ class Project < ActiveRecord::Base
   end
 
 
-  private 
+  private
 
   def convert_to_cents_if_dollar_goal_updated
     if ! self.id

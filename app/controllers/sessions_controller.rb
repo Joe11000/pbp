@@ -17,12 +17,13 @@ class SessionsController < ApplicationController
 	end
 
   def sign_in
-    @user = User.find(params[:id])
-    if @user.authenticate(params[user])
-      session[:user_id]
-      redirect_to root_url
+
+    if User.find_by_email(params["email"]).try(:authenticate, params["password"]).nil?
+      redirect_to new_user_url
     else
-      render template: 'user/new'
+      user = User.find_by_email(params[:email])
+      session[:user_id] = user.id
+      redirect_to root_url
     end
   end
 end

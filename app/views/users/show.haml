@@ -31,5 +31,26 @@
       .span8
         .blog-list
           .blog-post
-            -10.times do
-              %h4= "Things"
+            %h3 Projects You Have Contributed To
+            %hr
+            -if @user.donated_projects.count == 0
+              %h4 Find a project you are passionate about today:
+              = link_to "click here to find a project", root_url
+            -else
+              -@user.donated_projects.each do |project|
+                =link_to "#{project.title}", project_url(project) 
+                \- Dollars Donated: #{project.get_dollars_donated} | Hours Donated: #{project.hours_donated}
+            %h3 Projects You Have Created
+            %hr
+            -if @user.created_projects.count == 0
+              %h4 You Don't Seem to have any projects, go make change:
+              = link_to "click here to create", new_project_url
+            -else
+              -@user.created_projects.each do |project|
+                -if project.funded?
+                  %span.label.label-success Funded
+                -else
+                  %span.label Not Funded
+                #{project.title} 
+                \- Ends on: #{project.deadline}
+                %br

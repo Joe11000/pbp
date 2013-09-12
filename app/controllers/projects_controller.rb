@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
+    @featured_project = @projects.sample
   end
 
   def new

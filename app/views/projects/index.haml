@@ -5,9 +5,15 @@
         .span12
           %h1 Support local projects with your time or money.
         .span6
-          %h4= @projects.first.title
+          %h4= @featured_project.title
+          .span6.feature
+            - if @featured_project.mediafiles.find_by_media_type("photo")
+              %br
+              %img{src: @featured_project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }}
+            %h3{style: "text-align: left"}= link_to @featured_project.title, project_url(@featured_project)
+
           .home-btns
-            %a.btn{:href => "/projects/#{@projects.first.id}"}
+            %a.btn{:href => project_url(@featured_project)}
               %i.icon-plus
               Back this project
             %a.btn{:href => "#trending-projects"}
@@ -35,7 +41,7 @@
       \==================================================
     .row-fluid
       <div class"span12">
-      %h1 Trending Projects
+      %h1#trending-projects Trending Projects
   - @projects.each_slice(3) do |row|
     .row-fluid
       - row.each do |project|

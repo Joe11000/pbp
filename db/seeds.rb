@@ -1,7 +1,5 @@
 require 'active_support/all'
 
-WebMock.allow_net_connect!
-
 def create_users(num)
 
   num.times do |i|

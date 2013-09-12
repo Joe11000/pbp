@@ -13,13 +13,15 @@
           
           .span3.pull-left{style: "margin-top: 35px; margin-left: 45px;"}
             .dollars
-              %h5{style: "text-align: left"}= Dollars Donated - "(#{@featured_project.get_dollars_donated / @featured_project.get_dollar_goal.to_f) / 100}"}
+              - featured_dollar_goal_percentage = @featured_project.get_dollar_goal.to_f > 0 ? ((@featured_project.get_dollars_donated / @featured_project.get_dollar_goal.to_f) * 100).floor : 100
+              - featured_hour_goal_percentage = @featured_project.hour_goal.to_f > 0 ? ((@featured_project.hours_donated / @featured_project.hour_goal.to_f) * 100).floor : 100
+              %h5{style: "text-align: left"}= "Dollars : #{featured_dollar_goal_percentage}%"
               .progress{class: "progress"}
-                .bar{style: "width: #{ (@featured_project.get_dollars_donated / @featured_project.get_dollar_goal.to_f) }%;"}
+                .bar{style: "width: #{ featured_dollar_goal_percentage }%;"}
             .hours
-              %h5{style: "text-align: left"} Hours Donated
+              %h5{style: "text-align: left"}= "Hours : #{featured_hour_goal_percentage}%" 
               .progress{class: "progress"}
-                .bar{style: "width: #{ (@featured_project.hours_donated / @featured_project.hour_goal.to_f) * 100 }%;"}
+                .bar{style: "width: #{ featured_hour_goal_percentage }%;"}
 
         .home-btns.span12.clearfix
           %a.btn{:href => project_url(@featured_project)}
@@ -53,17 +55,20 @@
   - @projects.each_slice(3) do |row|
     .row-fluid
       - row.each do |project|
+        - project_dollar_goal_percentage = project.get_dollar_goal.to_f > 0 ? ((project.get_dollars_donated / project.get_dollar_goal.to_f) * 100).floor : 100
+        - project_hour_goal_percentage = project.hour_goal.to_f > 0 ? ((project.hours_donated / project.hour_goal.to_f) * 100).floor : 100
+
         .span4.content-box-light.feature
           - if project.mediafiles.find_by_media_type("photo")
             %br
-            = link_to image_tag(project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }), project_url(project)
+            %img{src: project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }}
           %h3{style: "text-align: left"}= link_to project.title, project_url(project)
           .dollars
-            %h5{style: "text-align: left"} Dollars
+            %h5{style: "text-align: left"}= "Dollars : #{project_dollar_goal_percentage}%"
             .progress{class: "progress"}
-              .bar{style: "width: #{ (project.get_dollars_donated / project.get_dollar_goal.to_f) }%;"}
+              .bar{style: "width: #{ project_dollar_goal_percentage }%;"}
           .hours
-            %h5{style: "text-align: left"} Hours
+            %h5{style: "text-align: left"}= "Hours : #{project_hour_goal_percentage}%"
             .progress{class: "progress"}
-              .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 100 }%;"}
-    %hr.hr-spacer.space50/
+              .bar{style: "width: #{project_hour_goal_percentage}%;"}
+/     %hr.hr-spacer.space50/

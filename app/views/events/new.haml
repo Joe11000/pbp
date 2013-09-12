@@ -19,11 +19,13 @@
       %tr
         %td{style: "width: 7.7%"}= "AM"
         - (1..12).to_a.each do |i|
-          %td.hours{style: "width: 7.7%", id: "#{i}"}
+          %td.hours{style: "width: 7.7%", id: "#{i - 1}"}
       %tr
         %td{style: "width: 7.7%"}= "PM"
         - (1..12).to_a.each do |i|
-          %td.hours{style: "width: 7.7%", id: "#{i + 12}"}
+          %td.hours{style: "width: 7.7%", id: "#{i + 11}"}
   .modal-footer
+    %button#save.btn.pull-right
+      Save
 
-= javascript_include_tag "calender/owner"
+= javascript_include_tag "calender/owner", "calender/month", "calender/day", "calender/hour"

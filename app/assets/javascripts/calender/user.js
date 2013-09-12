@@ -47,10 +47,7 @@ $(function(){
         })
       })
     })
-    console.log(event_ids)
-    $.post('/projects/' + id + '/commitments', {event_ids: event_ids}, function(response){
-
-    })
+    $.post('/projects/' + id + '/commitments', {event_ids: event_ids})
   })
 })
 

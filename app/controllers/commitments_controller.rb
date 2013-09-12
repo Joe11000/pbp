@@ -1,20 +1,20 @@
 class CommitmentsController < ApplicationController
-  def create
-    success = Array.new
-    params[:event_ids].each do |id|
-      if current_user.events << Event.find(id)
-        success << true
-      else
-        success << false
-      end
-    end
+  load_and_authorize_resource :project
 
+  def index
     if request.xhr?
-      render text: success.inject(:&)
+      render json: current_user.commitment_ids(@project.id)
+    else
+      render nothing: true
+    end
+  end
+
+  def create
+    if request.xhr?
+      render text: current_user.update_events(params[:event_ids])
     else
       @project = Project.find(params[:project_id])
-      @events = @project.events
-      redirect_to project_events_url(@project, @events)
+      redirect_to project_url(@project)
     end
   end
 end

@@ -45,4 +45,23 @@ class Project < ActiveRecord::Base
   def get_events_for_day(date)
     self.events.keep_if { |event| event.date.strftime("%Y-%m-%d") == date }
   end
+
+  def get_events
+    Event.create_default(id) if self.events.empty?
+    self.events
+  end
+
+  def update_events(events)
+    new_events = []
+    events.each do |day|
+      day = day[1]
+      day["hours"].each do |hour|
+        new_events << self.events.find_or_create_by_date_and_hour(day["date"], hour.to_i)
+      end
+    end
+
+    self.events.each do |event|
+      event.destroy unless new_events.include?(event)
+    end
+  end
 end

@@ -1,25 +1,32 @@
 class EventsController < ApplicationController
+  load_and_authorize_resource :project
+
   def index
-      @project = Project.find(params[:project_id]) 
-      @events = @project.events
+    @events = @project.get_events
     if request.xhr?
-      render json: @events
+      render json: @events.to_json(methods: :attendance)
     else
       render :index
     end
   end
 
   def new
-    @project = Project.find(params[:project_id])
+    if current_user == @project.owner && @project.funded?
+      @event = Event.new
+      render :new
+    else
+      flash[:notice] = "You aren't supposed to be here."
+      redirect_to root_url
+    end
   end
 
   def create
-    @project = Project.find(params[:project_id])
-    params[:events].each do |day|
-      day[1].each do |hour|
-        @project.events.create(date: Date.parse(day[0]), hour: hour)
-      end
+    if current_user == @project.owner && @project.funded?
+      @project.update_events(params[:events])
+      render text: "Hi"
+    else
+      flash[:notice] == "You can't do this."
+      redirect_to root_url
     end
-    render text: "Hi"
   end
 end

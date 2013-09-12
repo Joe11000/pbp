@@ -50,9 +50,7 @@ $(function(){
         }
       })
     })
-    $.post('/projects/' + id + '/events/', {events: events}, function(response){
-
-    })
+    $.post('/projects/' + id + '/events/', {events: events})
   })
 })
 

@@ -33,6 +33,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'debugger'
 end
 
 group :test do

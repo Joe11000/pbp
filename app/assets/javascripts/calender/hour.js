@@ -23,6 +23,5 @@ Hour.prototype.toggle_volunteers = function(toggle){
 }
 
 Hour.prototype.set_valid = function(valid){
-  console.log("SET HOUR")
   this.valid = valid
 }

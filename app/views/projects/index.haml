@@ -1,20 +1,34 @@
 #page-heading
   .page-header
     .container
-      .row.home
+      %h1{style: 'color: white'} Support local projects with your time or money.
+      .row.home{style: 'margin-top: 400px; padding-bottom: 5px'}
         .span12
-          %h1 Support local projects with your time or money.
-        .span6
-          %h4= @projects.first.title
-          .home-btns
-            %a.btn{:href => "/projects/#{@projects.first.id}"}
-              %i.icon-plus
-              Back this project
-            %a.btn{:href => "#trending-projects"}
-              %i.icon-plus
-              See more projects
-        .span6
-          / %img{:alt => "", :src => "assets/img/park_bench.jpg"}/
+          %h1.pull-left{style: 'margin-bottom: 10px'} Featured Project:
+        .span6.pull-left
+          - if @featured_project.mediafiles.find_by_media_type("photo")
+            %br
+            %img{src: @featured_project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }}
+            %h3{style: "text-align: left"}= link_to @featured_project.title, project_url(@featured_project)    
+        .span3.pull-left
+          .dollars
+            - featured_dollar_goal_percentage = @featured_project.get_dollar_goal.to_f > 0 ? ((@featured_project.get_dollars_donated / @featured_project.get_dollar_goal.to_f) * 100).floor : 100
+            - featured_hour_goal_percentage = @featured_project.hour_goal.to_f > 0 ? ((@featured_project.hours_donated / @featured_project.hour_goal.to_f) * 100).floor : 100
+            %h5{style: "text-align: left"}= "Dollars : #{featured_dollar_goal_percentage}%"
+            .progress{class: "progress"}
+              .bar{style: "width: #{ featured_dollar_goal_percentage }%;"}
+          .hours
+            %h5{style: "text-align: left"}= "Hours : #{featured_hour_goal_percentage}%" 
+            .progress{class: "progress"}
+              .bar{style: "width: #{ featured_hour_goal_percentage }%;"}
+      .home-btns
+        %a.btn{:href => project_url(@featured_project)}
+          %i.icon-plus
+          Back this project
+        %a.btn{:href => "#trending-projects"}
+          %i.icon-plus
+          See more projects
+
   .home-cta
     .container
       .arrow-down
@@ -35,21 +49,32 @@
       \==================================================
     .row-fluid
       <div class"span12">
-      %h1 Trending Projects
+      %h1#trending-projects Trending Projects
   - @projects.each_slice(3) do |row|
     .row-fluid
       - row.each do |project|
+        - project_dollar_goal_percentage = project.get_dollar_goal.to_f > 0 ? ((project.get_dollars_donated / project.get_dollar_goal.to_f) * 100).floor : 100
+        - project_hour_goal_percentage = project.hour_goal.to_f > 0 ? ((project.hours_donated / project.hour_goal.to_f) * 100).floor : 100
+
         .span4.content-box-light.feature
           - if project.mediafiles.find_by_media_type("photo")
             %br
-            = link_to image_tag(project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }), project_url(project)
+            %img{src: project.mediafiles.find_by_media_type("photo").url, data: {src: "holder.js/300x200" }}
           %h3{style: "text-align: left"}= link_to project.title, project_url(project)
           .dollars
-            %h5{style: "text-align: left"} Dollars
+            %h5{style: "text-align: left"}= "Dollars : #{project_dollar_goal_percentage}%"
             .progress{class: "progress"}
-              .bar{style: "width: #{ (project.get_dollars_donated / project.get_dollar_goal.to_f) }%;"}
+              .bar{style: "width: #{ project_dollar_goal_percentage }%;"}
           .hours
-            %h5{style: "text-align: left"} Hours
+            %h5{style: "text-align: left"}= "Hours : #{project_hour_goal_percentage}%"
             .progress{class: "progress"}
-              .bar{style: "width: #{ (project.hours_donated / project.hour_goal.to_f) * 100 }%;"}
-    %hr.hr-spacer.space50/
+              .bar{style: "width: #{project_hour_goal_percentage}%;"}
+/     %hr.hr-spacer.space50/
+
+// :javascript
+//   $('#page-heading .page-header')
+//     .css('background-image', 'url("park_bench2.jpg")')
+//     .css('background-repeat', 'none')
+//     .css('padding: 0')
+
+= stylesheet_link_tag "index"

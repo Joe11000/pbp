@@ -1,4 +1,5 @@
 #page-heading
+%img
   .page-header
     .container
       .row
@@ -45,7 +46,7 @@
             %hr
             - if can? :create, Donation
               = link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
-              %br 
+              %br
               = link_to "Updates", project_updates_url(@project)
             - else
               = link_to 'Give To Project', new_user_url, class: 'btn btn-large'

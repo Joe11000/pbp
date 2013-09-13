@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many   :donators, through: :donations, source: :user
   has_many   :mediafiles
   has_many   :updates
+  has_many   :events, dependent: :destroy
 
   validates_presence_of :owner, :title, :description, :deadline
   validates_uniqueness_of :title
@@ -64,6 +65,28 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def get_events_for_day(date)
+    self.events.keep_if { |event| event.date.strftime("%Y-%m-%d") == date }
+  end
+
+  def get_events
+    Event.create_default(id) if self.events.empty?
+    self.events
+  end
+
+  def update_events(events)
+    new_events = []
+    events.each do |day|
+      day = day[1]
+      day["hours"].each do |hour|
+        new_events << self.events.find_or_create_by_date_and_hour(day["date"], hour.to_i)
+      end
+    end
+
+    self.events.each do |event|
+      event.destroy unless new_events.include?(event)
+    end
+  end
 
   private
 
@@ -71,7 +94,7 @@ class Project < ActiveRecord::Base
     if ! self.id
       dollar_goal_to_cents_into_db
     elsif Project.find(self.id).dollar_goal / 100.00 != self.dollar_goal
-      dollar_goal_to_cents_into_db 
+      dollar_goal_to_cents_into_db
     end
   end
 

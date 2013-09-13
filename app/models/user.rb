@@ -5,7 +5,9 @@ Balanced.configure(ENV["BALANCED_SECRET"])
 class User < ActiveRecord::Base
   has_many :created_projects, class_name: "Project", foreign_key: :owner_id
   has_many :donations
-  has_many :donated_projects, through: :donations, source: :project 
+  has_many :donated_projects, through: :donations, source: :project
+  has_many :commitments, dependent: :destroy
+  has_many :events, through: :commitments
 
   validates_presence_of :first_name, :last_name, :email, :location, :nickname
   validates_uniqueness_of :email
@@ -124,5 +126,22 @@ class User < ActiveRecord::Base
 
   def donations
     Donation.where(user_id: self.id) if self.id
-  end 
+  end
+
+  def update_events(event_ids)
+    self.events.each do |event|
+      unless event_ids.include?(event.id.to_s)
+        Commitment.find_by_user_id_and_event_id(id, event.id).destroy
+      end
+    end
+
+    event_ids.each do |id|
+      event = Event.find(id)
+      self.events << event unless self.events.include?(event)
+    end
+  end
+
+  def commitment_ids(project_id)
+    commitments.select { |commitment| commitment.project.id == project_id }.map { |commit| commit.event_id }
+  end
 end

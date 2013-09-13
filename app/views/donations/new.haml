@@ -1,4 +1,21 @@
+
+#page-heading
+  .page-header
+    .container
+      .row
+        .span12
+          %h1 Be a giver. Every penny counts.  Every minute matters.
+  .container
+    .arrow-down
+%hr.hr-spacer.space30
 - if flash[:notice]
   %h5= flash[:notice]
-
-= render partial: "form"
+#blog
+  .container
+    .row-fluid
+      .span8.offset2
+        .blog-list
+          .blog-post
+            %h1 Okay!
+            %h2 How much can you give?
+            = render partial: "form"

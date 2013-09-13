@@ -1,13 +1,9 @@
 #page-heading
-%img
   .page-header
     .container
       .row
         .span12
-          %h1= @project.title
-          %h3= "by " + @project.owner.nickname
   .container
-    .arrow-down
 %hr.hr-spacer.space30/
 /
   Main Content
@@ -24,6 +20,12 @@
       Content Block
       \==================================================
     .row
+      .span12
+        .blog-list
+          .blog-post
+            %h1= @project.title
+            %h3= "by " + @project.owner.nickname
+          %br
       .span8
         .blog-list
           .blog-post
@@ -43,24 +45,28 @@
             %h4= "pledged of $" + @project.get_dollar_goal.to_s + " goal"
             %h1= @project.time_remaining.to_s
             %h4 days to go
-            %hr
-            - if can? :create, Donation
-              = link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
-              %br
-              = link_to "Updates", project_updates_url(@project)
-            - else
-              = link_to 'Give To Project', new_user_url, class: 'btn btn-large'
             %h6 This project will be funded on
             %p= @project.deadline.strftime("%m/%d/%Y")
-            %hr
+            - if can? :create, Donation
+              %hr
+              = link_to 'Give To Project', new_project_donation_url(@project), class: 'btn btn-lrg'
+              %hr
+              = link_to "Updates", project_updates_url(@project), class: 'btn btn-lrg'
+            - else
+              = link_to 'Give To Project', new_user_url, class: 'btn btn-large'
+            - if current_user && current_user.donated_projects.include?(@project)
+              %hr
+              = link_to "Select Time To Volunteer", project_events_url(@project), class: 'btn btn-lrg'
             - if can? :edit, @project
+              %hr
               = link_to "Edit This Project", edit_project_url(@project), class: 'btn btn-lrg'
               %hr
-              = link_to "Add an Update", new_project_update_url(@project)
-              %br
-              %br
-            - if @project.funded?
-              = link_to "Add Bank Account", user_bankaccounts_url(current_user), class: "btn btn-large"
+              = link_to "Add an Update", new_project_update_url(@project), class: 'btn btn-lrg'
+              - if @project.funded?
+                %hr
+                = link_to "Add Times To Volunteer", new_project_event_url(@project), class: 'btn btn-lrg'
+                %hr
+                = link_to "Add Bank Account", user_bankaccounts_url(current_user), class: 'btn btn-lrg'
         %br
         .blog-side
           .side-box

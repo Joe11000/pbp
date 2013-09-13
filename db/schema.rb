@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(:version => 20130911184435) do
     t.integer "comment_id"
   end
 
+  create_table "commitments", :force => true do |t|
+    t.integer "user_id"
+    t.integer "event_id"
+  end
+
   create_table "donations", :force => true do |t|
     t.integer  "user_id",                      :null => false
     t.integer  "project_id",                   :null => false
@@ -26,6 +31,14 @@ ActiveRecord::Schema.define(:version => 20130911184435) do
     t.integer  "dollar_amount", :default => 0
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "project_id"
+    t.date     "date"
+    t.integer  "hour"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "mediafiles", :force => true do |t|
